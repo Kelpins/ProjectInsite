@@ -1,0 +1,32 @@
+{% extends "base.html.j2" %}
+
+{% block body %}
+
+<h1 class="center">Create a New Website</h1>
+<br>
+<form method="POST" action="upload">
+    <div class="center">
+        <label>What is your website going to be called?</label>
+        <input type="text" name="websiteName">
+        <br>
+        <br>
+        <label>What are you planning on having your website do?</label>
+        <label>Choose a website type from this list:</label>
+        <input list="webTypes" name="webType">
+        <datalist id="webTypes">
+            <option value="Gallery">
+            <option value="E-Commerce">
+            <option value="Blog">
+            <option value="Consultant">
+        </datalist>
+        <br>
+        <br>
+        <br>
+        <input type="submit" value="Next" class="btn btn-primary">
+        <br>
+        <p class="center" style="font-style:italic">If you are unsure about any of the questions feel free to leave the
+            answer blank.</p>
+    </div>
+</form>
+
+{% endblock %}

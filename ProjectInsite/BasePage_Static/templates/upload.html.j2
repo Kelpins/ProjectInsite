@@ -1,0 +1,18 @@
+{% extends "base.html.j2" %}
+
+{% block body %}
+
+<h1 class="center">Upload any media you may want on your website</h1>
+<br>
+<div class="center">
+    <form method="POST" action="templates">
+        <label>Choose Files:</label>
+        <input type="file" name="files" accept="image/png, image/jpg, image/jpeg" multiple>
+        <br>
+        <br>
+        <br>
+        <input type="submit" value="Next" class="btn btn-primary">
+    </form>
+</div>
+
+{% endblock %}

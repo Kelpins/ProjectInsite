@@ -1,0 +1,9 @@
+{% extends "base.html.j2" %}
+
+{% block body %}
+
+<h1 class="center">{{name}}</h1>
+{% for i in range(files|length) %}
+<img src={{files[i]}} alt="img" width="200px" height="200px">
+{% endfor %}
+{% endblock %}

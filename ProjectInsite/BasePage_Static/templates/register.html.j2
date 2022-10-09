@@ -1,0 +1,50 @@
+{% extends "base.html.j2" %}
+
+{% block body %}
+
+<h1 class="center">Register</h1>
+<form method="POST" action="test" id="registrationForm">
+    <div id="form1">
+        <div id="personalInfo">
+            First Name: <br>
+            <input type="text" name="fname" required><br>
+            Last Name: <br>
+            <input type="text" name="lname" required><br>
+            Date Of Birth: <br>
+            <input type="date" name="dob" required><br>
+        </div>
+        <br>
+        <hr>
+        <br>
+        <div id="contactInfo">
+            Email: <br>
+            <input type="email" name="email" required><br>
+            Phone Number: <br>
+            <input type="number" name="phnnum" required><br>
+        </div>
+        <br>
+        <hr>
+        <br>
+        <div id="registrationInfo">
+            Username: <br>
+            <input type="text" name="uname" required><br>
+            Password: <br>
+            <input type="password" name="pwd" required><br>
+        </div>
+    </div>
+    <br>
+    <hr>
+    <br>
+    <div id="checkboxes" class="center">
+        <input type="checkbox" name="terms" required> Accept our <a href="terms" target="_blank"> Terms and Agreements
+        </a>
+        <br><br>
+        <input type="checkbox" name="emails" checked> Would you like to receive daily email notifications and our
+        newsletter?
+    </div>
+    <br><br>
+    <div class="center">
+        <input type="submit" value="Submit!" class="btn btn-success">
+    </div>
+</form>
+{% endblock %}
