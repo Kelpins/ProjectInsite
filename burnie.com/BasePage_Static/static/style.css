@@ -23,6 +23,12 @@ body {
 
 }
 
+#columns {
+
+    display: flex;
+
+}
+
 #constrained {
 
     margin: 5%
