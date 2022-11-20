@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
-webData = []
+#webData = []
 
 #Routers
 @app.route('/')
@@ -32,11 +32,11 @@ def privacy():
 #     webData.append(type)
 #     return render_template('upload.html.j2')
 
-@app.route('/templates', methods=["GET", "POST"])
-def templatePage():
-    files = request.values.get("files")
-    webData.append(files)
-    return render_template('templates.html.j2')
+#@app.route('/templates', methods=["GET", "POST"])
+#def templatePage():
+#    files = request.values.get("files")
+#    webData.append(files)
+#    return render_template('templates.html.j2')
 
 # @app.route('/editwebsite', methods=["GET", "POST"])
 # def create():
