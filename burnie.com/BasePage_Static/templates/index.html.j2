@@ -1,19 +1,47 @@
 {% extends "base.html.j2" %}
 
+    <!-- Nav Bar -->
+        <!-- Home/About -->
+        <!-- Text -->
 {% block head %}
-    <title>Home</title>
+
+<title>Home</title>
+
+<!-- Header -->
+    <!-- Image Thing -->
+        <!-- Heading -->
+        <!-- SM Links -->
+<!-- -->
+<div id = "header"
+  class="bg-image d-flex justify-content-end"
+  style="
+    height: 400px;
+    background-color:#00144a;
+    color:#ffffff;
+    background-image: linear-gradient(rgba(0, 20, 74, 0.5), rgba(0, 20, 74, 0.5)), url('static/HomeHeader.png');
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position:61% 21%;
+    background-attachment:fixed;
+    clip-path:polygon(0 0, 100% 0px, 100% calc(100% - 100px), 0 100%);
+    -webkit-clip-path:polygon(0 0, 100% 0, 100% calc(100% - 100px), 0 100%);
+    "
+>
+
+    <div id="header-contents" class="d-flex flex-column">
+        <h1 class="m-4">burnie.com</h1>
+        <div class="d-flex flex-row">
+            <a class="m-2" href="https://www.instagram.com/burnie/">instagram</a>
+            <a class="m-2" href="https://www.twitter.com/burnie">twitter</a>
+            <a class="m-2" href="mailto:kellan@edgy.org">email</a>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
 
 {% block body %}
 
-<!-- Header -->
-
-    <!-- Nav Bar -->
-        <!-- Home/About -->
-        <!-- Text -->
-    <!-- Image Thing -->
-        <!-- Heading -->
-        <!-- SM Links -->
 
 <!-- Main Body -->
 <!-- 3 Columns -->

@@ -3,7 +3,29 @@
 {% block head %}
 
 <title>About</title>
-<p>You ever have a dream so boring, that in it you were reading the About page on a middle-aged influencer's website?</p>
+
+<div id="header"
+  class="bg-image d-flex justify-content-start"
+  style="
+    height:700px;
+    background-color:#00144a;
+    color:#ffffff;
+    background-image: linear-gradient(rgba(21, 151, 238, 0.5), rgba(21, 151, 238, 0.5)), url('static/AboutHeader.png');
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position:57% 46%;
+    background-attachment:scroll;
+    clip-path:polygon(0 0, 100% 0px, 100% calc(100% - 100px), 0 100%);
+    -webkit-clip-path:polygon(0 0, 100% 0, 100% calc(100% - 100px), 0 100%);
+    "
+>
+    <div id="header-contents" class="d-flex flex-column">
+        <h1 class="m-4">About</h1>
+        <p class="m-4">You ever have a dream so boring, that in it you were reading the About page on a middle-aged influencer's website?</p>
+
+    </div>
+ 
+</div>
 
 {% endblock %}
 

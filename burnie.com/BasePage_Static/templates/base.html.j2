@@ -24,18 +24,41 @@
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
         crossorigin="anonymous"></script>
     {% endblock %}
+
     <!-- Footer -->
-    <footer>
-        <!-- diagonal swoosh -->
-        <!-- Home/About -->
-        <nav id="foot">
-            <a href="/">Home</a>
-            <a href="/about">About</a>
-        </nav>
-        <!-- Copyright -->
-        <p>©Copyright 2022. All rights reserved.</p>
-        <!-- Privacy Policy -->
-        <a id="privacy-policy" href="/privacy-policy">Privacy Policy</a>
+    
+    <!-- diagonal swoosh -->
+    <div id="footer-slant"
+    style="
+        height: 100px;
+        background-color:#00144a;
+        color:#ffffff;        
+        clip-path:polygon(100% 0, 100% 100%,  0 100%);
+        -webkit-clip-path:polygon(100% 0, 100% 100%, 0 100%);
+        "
+    >
+    </div>
+
+    <footer class="text-center" 
+        style="
+        height: 150px;
+        background-color:#00144a;
+        color:#ffffff;
+        "
+        >
+        
+        <div class="container p-3">
+        
+            <!-- Home/About -->
+            <nav id="footer-nav">
+                <a href="/">Home</a>
+                <a href="/about">About</a>
+            </nav>
+            <!-- Copyright -->
+            <p>©Copyright 2022. All rights reserved.</p>
+            <!-- Privacy Policy -->
+            <a id="privacy-policy" href="/privacy-policy">Privacy Policy</a>
+        </div>
     </footer>
 
 </body>
