@@ -1,12 +1,16 @@
 {% extends "base.html.j2" %}
 
-
-{% block head %}
+{% block title %}
 
 <title>Privacy Policy</title>
 
+{% endblock title %}
+
+{% block head %}
+
+
 <div id="header"
-  class="bg-image d-flex justify-content-start"
+  class="bg-image container-fluid d-flex justify-content-center"
   style="
     height:600px;
     background-color:#00144a;
@@ -16,13 +20,16 @@
     background-repeat:no-repeat;
     background-position:51% 35%;
     background-attachment:scroll;
-    clip-path:polygon(0 0, 100% 0px, 100% calc(100% - 100px), 0 100%);
+    clip-path:polygon(0 0, 100% 0, 100% calc(100% - 100px), 0 100%);
     -webkit-clip-path:polygon(0 0, 100% 0, 100% calc(100% - 100px), 0 100%);
     "
 >
-    <div id="header-contents" class="d-flex flex-column">
-        <h1 class="m-4">Privacy Policy</h1>
-        <p class="m-4">Listen. You just mind your own beeswax and I'll mind mine.</p>
+    <div id="header-contents" 
+        class="d-flex flex-column justify-content-center align-items-start"
+        style="width: 75%"
+    >
+        <h1 class="mt-4 mb-4">Privacy Policy</h1>
+        <p class="mt-4 mb-4">Listen. You just mind your own beeswax and I'll mind mine.</p>
     </div>
  
 </div>
@@ -31,6 +38,11 @@
 
 {% block body %}
 
-<p>Void in the EU. Don't even look at this or I'm calling the gendarmes, Pierre.</p>
+<div id="main-body"
+    class="container mt-5 mb-5"
+    style="width: 75%"
+>
+    <p>Void in the EU. Don't even look at this or I'm calling the gendarmes, Pierre.</p>
+</div>
 
 {% endblock %}

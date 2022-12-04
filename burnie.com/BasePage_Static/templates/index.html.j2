@@ -1,19 +1,20 @@
 {% extends "base.html.j2" %}
 
-    <!-- Nav Bar -->
-        <!-- Home/About -->
-        <!-- Text -->
-{% block head %}
+
+{% block title %}
 
 <title>Home</title>
 
+{% endblock title %}
+
+{% block head %}
+
+
 <!-- Header -->
     <!-- Image Thing -->
-        <!-- Heading -->
-        <!-- SM Links -->
 <!-- -->
 <div id = "header"
-  class="bg-image d-flex justify-content-end"
+  class="bg-image container-fluid d-flex justify-content-center"
   style="
     height: 400px;
     background-color:#00144a;
@@ -23,14 +24,21 @@
     background-repeat:no-repeat;
     background-position:61% 21%;
     background-attachment:fixed;
-    clip-path:polygon(0 0, 100% 0px, 100% calc(100% - 100px), 0 100%);
+    clip-path:polygon(0 0, 100% 0, 100% calc(100% - 100px), 0 100%);
     -webkit-clip-path:polygon(0 0, 100% 0, 100% calc(100% - 100px), 0 100%);
     "
 >
-
-    <div id="header-contents" class="d-flex flex-column">
-        <h1 class="m-4">burnie.com</h1>
-        <div class="d-flex flex-row">
+    <!-- justify-content is y-axis, align-items is x-axis -->
+    <div id="header-contents" 
+        class="d-flex flex-column justify-content-center align-items-end"
+        style="width: 75%"
+    >
+        <!-- Heading -->
+        <!-- SM Links -->
+        <div id="site-name" class="d-flex flex-row">
+            <h1 class="mt-4 mb-4">burnie.com</h1>
+        </div>
+        <div id="SM-links" class="d-flex flex-row">
             <a class="m-2" href="https://www.instagram.com/burnie/">instagram</a>
             <a class="m-2" href="https://www.twitter.com/burnie">twitter</a>
             <a class="m-2" href="mailto:kellan@edgy.org">email</a>
@@ -45,17 +53,17 @@
 
 <!-- Main Body -->
 <!-- 3 Columns -->
-<div class="container">
+<div id="main-body" class="container mt-5 mb-5">
     <div class="row">
 
 
         <!-- Column 1 -->
-        <div class="col-3">
+        <div id="new-map" class="col-3">
             <!-- Heading -->
             <h2>gg new map</h2>
         </div>
         <!-- Column 2 -->
-        <div class="col-6">
+        <div id="mid-text" class="col-6">
             <!-- Text -->
             <p>
             In the summer of 1990, I packed everything I owned into a beat up old Nissan and set out for Austin to study Biology/PreMed at the University of Texas. Over the next thirty years, I changed majors twice, made some incredible friends, sold the car for two hundred dollars, had a wild dotcom career in telecom, raised three sons and started a small media company in a spare bedroom of my house that blossomed into something beyond my wildest dreams. It is a bit surreal that three decades later, almost to the day, I will be moving out of this city that I may always call “home” to begin a grand new adventure in a life overseas.
@@ -79,7 +87,7 @@
             </p>
         </div>
         <!-- Column 3 -->
-        <div class="col-3">
+        <div id="burnie-img" class="col-3">
             <!-- Image -->
             <img src="static/BURNIE.jpeg" alt="smiling burnie">
         </div>
