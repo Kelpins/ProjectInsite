@@ -1,0 +1,162 @@
+{% extends "base.html.j2" %}
+
+{% block title %}
+
+<title>About</title>
+
+{% endblock title %}
+
+{% block head %}
+
+<!-- -->
+
+<!-- Header/Triangle Thing -->
+<!-- 
+700px
+rgba(21, 151, 238, 0.5)
+static/AboutHeader.png
+57% 46%
+-->
+
+<div id="header"
+  class="slant-header container-fluid d-flex justify-content-center"
+  style="
+    height: {{head_height}};
+    background-image: linear-gradient({{head_color}},{{head_color}} ), url(' {{head_img}} ');
+    background-position: {{head_img_pos}} ;
+    background-attachment:scroll;
+    "
+>
+    <!--
+    You ever have a dream so boring, that in it you were reading the About page on a middle-aged influencer's website? 
+    -->
+    <div id="header-contents" 
+      class="d-flex flex-column justify-content-center align-items-start"
+      style="width: 80%"
+    >
+        <h1 class="mt-4 mb-4">About</h1>
+        <p class="mt-4 mb-4"> {{head_blurb}} </p>
+
+    </div>
+ 
+</div>
+
+{% endblock %}
+
+{% block body %}
+
+<!-- Heading -->
+
+<div id="main-top"
+  class="container mt-5"
+  style="width: 80%"
+>
+  <h1>{{body_title}} </h1>
+  <p>{{body_subtitle}} </p>
+</div>
+<div id="main-body"
+  class="container mt-5 mb-5"
+  style="width: 80%"
+>
+
+  <div id="top-row" class="row">
+  {% for card in topCards %}
+
+    <div class="col-4">
+        <img src="{{card.img}}" alt="{{card.img_name}}">
+        <h3> {{card.heading}} </h3>
+        <p> {{card.text}} </p>
+    </div>
+
+  {% endfor %}
+  </div>
+
+  <div id="bottom-row" class="row">
+  {% for card in bottomCards %}
+
+    <div class="col-4">
+        <img src="{{card.img}}" alt="{{card.img_name}}">
+        <h3> {{card.heading}} </h3>
+        <p> {{card.text}} </p>
+    </div>
+
+  {% endfor %}
+  </div>
+  {# <!-- Top row -->
+  <div id="top-row" class="row">
+
+    <!-- Top left -->
+
+      <div class="col-4 ">
+        <!-- Image -->
+        <img src="static/LeaningBurnie.jpg" alt="leaning burnie">
+        <!-- Heading -->
+        <h3>Smooth</h3>
+        <!-- Text -->
+        <p>Writer. Director. Father. One hundred percent lifetime field goal kicker. Entrepreneur. Actor. Cheeseburger. Large Coke. To Go.</p>
+      </div>
+
+      <!-- Top center -->
+
+      <div class="col-4 ">
+        <!-- Image -->
+        <img src="static/CoolBurnie.jpg" alt="cool burnie">
+        <!-- Heading -->
+        <h3>Self-dressing</h3>
+        <!-- Text -->
+        <p>Zippers. Buttons. Nothing curbs his pure passion for putting on clothes to protect himself from the elements.</p>
+      </div>
+
+      <!-- Top right -->
+
+      <div class="col-4 ">
+        <!-- Image -->
+        <img src="static/YoungBurnie.jpg" alt="young burnie top">
+        <!-- Heading -->
+        <h3>1400 on the SAT</h3>
+        <!-- Text -->
+        <p>Suck it, Bobby. You had to go to Tech.</p>
+      </div>
+    </div>
+  <!-- Bottom row -->
+  <div id="bottom-row" class="row"> 
+    <!-- Bottom left -->
+
+    <div class="col-4 ">
+      <!-- Image -->
+      <img src="static/GunKids.jpg" alt="gun kids">
+      <!-- Heading -->
+      <h3>Prepared for the future with weaponized youth</h3>
+      <!-- Text -->
+      <p>Radicalizing children since 2002. Volume discounts.</p>
+    </div>
+
+    <!-- Bottom center -->
+
+    <div class="col-4 ">
+      <!-- Image -->
+      <img src="static/Wife.jpg" alt="wife">
+      <!-- Heading -->
+      <h3>Wife. Now with butt</h3>
+      <!-- Text -->
+      <p>She doesn't know this was posted.
+
+          Exhibit A, Divorce Proceedings.</p>
+    </div>
+
+    <!-- Bottom right -->
+
+    <div class="col-4 ">
+      <!-- Image -->
+      <img src="static/YoungBurnie2.jpg" alt="young burnie bottom">
+      <!-- Heading -->
+      <h3>Three pieces of wide collared manhood</h3>
+      <!-- Text -->
+      <p>While you were reading this, he stole your girl. No take backs, champ.</p>
+    </div>
+
+  </div> #}
+
+</div>
+
+{% endblock %}

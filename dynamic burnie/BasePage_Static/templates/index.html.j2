@@ -1,0 +1,102 @@
+{% extends "base.html.j2" %}
+
+
+{% block title %}
+
+<title>Home</title>
+
+{% endblock title %}
+
+{% block head %}
+
+
+<!-- Header -->
+    <!-- Image Thing -->
+<!-- -->
+<!-- 
+    400px
+    rgba(0, 20, 74, 0.5)
+    static/HomeHeader.png
+    61% 21%
+-->
+<div id = "header"
+  class="slant-header container-fluid d-flex justify-content-center"
+  style="
+    height: {{head_height}} ;
+    background-image: linear-gradient( {{head_color}}, {{head_color}}), url(' {{head_img}} ');
+    background-position: {{head_img_pos}};
+    background-attachment:fixed;
+
+    "
+>
+    <!-- justify-content is y-axis, align-items is x-axis -->
+    <div id="header-contents" 
+        class="d-flex flex-column justify-content-center align-items-end"
+        style="width: 75%"
+    >
+        <!-- Heading -->
+        <!-- SM Links -->
+        <!-- burnie.com -->
+        <div id="site-name" class="d-flex flex-row">
+            <h1 class="mt-4 mb-4"> {{site_name}} </h1>
+        </div>
+        <!--
+        https://www.instagram.com/burnie/
+        https://www.twitter.com/burnie
+        mailto:kellan@edgy.org
+        -->
+        <div id="SM-links" class="d-flex flex-row">
+            <a class="m-2" href="{{instagram}}">instagram</a>
+            <a class="m-2" href="{{twitter}}">twitter</a>
+            <a class="m-2" href="{{email}}">email</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block body %}
+
+
+<!-- Main Body -->
+<!-- 3 Columns -->
+<div id="main-body" class="container mt-5 mb-5">
+    <div class="row">
+
+
+        <!-- Column 1 -->
+        <div id="new-map" class="col-3">
+            <!-- Heading -->
+            <h2> {{left_col}} </h2>
+        </div>
+        <!-- Column 2 -->
+        <div id="mid-text" class="col-6">
+            <!-- Text -->
+            <p>
+            In the summer of 1990, I packed everything I owned into a beat up old Nissan and set out for Austin to study Biology/PreMed at the University of Texas. Over the next thirty years, I changed majors twice, made some incredible friends, sold the car for two hundred dollars, had a wild dotcom career in telecom, raised three sons and started a small media company in a spare bedroom of my house that blossomed into something beyond my wildest dreams. It is a bit surreal that three decades later, almost to the day, I will be moving out of this city that I may always call “home” to begin a grand new adventure in a life overseas.
+            </p>
+            <p>
+            It is difficult to leave my home country during such a tumultuous time. Ashley and I set these plans in motion over two years ago, and we could never have predicted the state of the world at the time we would embark. We believe in the strength and the promise of this nation as much as ever. We look forward to returning to a country that has made many long overdue changes to benefit all of its citizens.
+            </p>
+            <p>
+            I want to express my deepest gratitude to everyone who supported me in my career at RT, with special thanks to Tony Goncalves who so skillfully leads the Otter family and Jordan Levin, who has RT moving in incredible new directions. Starting this company and growing it in the early years were some of the hardest but greatest moments of my life. The constant camaraderie of Gus, Geoff, and Matt always made the impossible seem achievable; I could not have asked for better companions on this journey. My wife Ashley has been the stable bedrock of my life and I am overjoyed to begin this next chapter of our family's story together.
+            </p>
+            <p>
+            Thank you to every person who has walked through these doors as a collaborator or tuned in to one of our videos as a viewer or made the choice to become a member of our community. Your support has meant the world to me and I hope that I had even a fraction of the positive impact on your life that you have had on mine. There have been a lot of ups and a few downs over the years, and I have learned so much from all of those experiences. I am eternally grateful that I had the opportunity to do what I love every day — an opportunity that I owe entirely to all of you.
+            </p>
+            <p>Thank you.</p>
+            <br>
+            <p>Be nice and work hard.</p> 
+            <br>
+            <p>Burnie</p>
+        </div>
+        <!-- Column 3 -->
+        <div id="burnie-img" class="col-3">
+            <!-- Image -->
+            <img src="{{right_col_img}}" alt="smiling burnie">
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
