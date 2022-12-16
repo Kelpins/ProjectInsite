@@ -3,22 +3,19 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 baseVars = {
-    "navbar_right" : "so much more than a body coach",
+    "navbar_right" : "so much more than a dude playing the cowbell",
     "copyright" : "©Copyright 2022. All rights reserved."
 }
 
 indexParagraphs = [
 
-    "In this guest blog post, Dr Louise Newson explains the essentials of perimenopause and menopause and talks about how exercise and good nutrition can help with the symptoms.",
-    "For decades, the menopause has been a taboo and there has been a huge amount of misinformation and misconceptions about treatment options, especially hormone replacement therapy (HRT). This has resulted in women's health being far worse than it could be otherwise. If more women were given the right advice and treatment based on the available evidence, women's health would improve and health costs to the NHS and other healthcare systems globally would also dramatically reduce.",
-    "What is the menopause?",
-    "The menopause is when the ovaries stop producing eggs and levels of hormones oestrogen, progesterone and testosterone fall.",
-    "The definition of menopause is when a woman hasn't had a period for 12 months, and the average age of the menopause in the UK is 51. However, it's really important to state that it doesn't just happen in mid-life: menopause before 45 is known as an early menopause, while menopause before the age of 40 is known as premature ovarian insufficiency (POI).",
-    "POI is a lot more common than most people think: it affects about 1 in 100 women under the age of 40, and 1 in 1,000 women under 30. Even girls in their teens can be perimenopausal or menopausal.",
-    "For most women with POI, the underlying cause is unknown, but it can be triggered by events such as having your ovaries removed, a hysterectomy, radiotherapy to the pelvic area as a treatment for cancer or if you have received certain types of chemotherapy drugs that treat cancer. In addition, eating disorders can lead to early menopause in some women.",
-    "What is the perimenopause?",
-    "The perimenopause is the time directly before the menopause, when you still have periods, but the fluctuating and low hormone levels - especially oestrogen - can trigger a whole host of symptoms.",
-    "There is no blood test for the perimenopause or menopause - they can often be diagnosed by completing a Menopause Symptom Questionnaire."
+    "In the summer of 1990, I packed everything I owned into a beat up old Nissan and set out for Austin to study Biology/PreMed at the University of Texas. Over the next thirty years, I changed majors twice, made some incredible friends, sold the car for two hundred dollars, had a wild dotcom career in telecom, raised three sons and started a small media company in a spare bedroom of my house that blossomed into something beyond my wildest dreams. It is a bit surreal that three decades later, almost to the day, I will be moving out of this city that I may always call “home” to begin a grand new adventure in a life overseas.",
+    "It is difficult to leave my home country during such a tumultuous time. Ashley and I set these plans in motion over two years ago, and we could never have predicted the state of the world at the time we would embark. We believe in the strength and the promise of this nation as much as ever. We look forward to returning to a country that has made many long overdue changes to benefit all of its citizens.",
+    "I want to express my deepest gratitude to everyone who supported me in my career at RT, with special thanks to Tony Goncalves who so skillfully leads the Otter family and Jordan Levin, who has RT moving in incredible new directions. Starting this company and growing it in the early years were some of the hardest but greatest moments of my life. The constant camaraderie of Gus, Geoff, and Matt always made the impossible seem achievable; I could not have asked for better companions on this journey. My wife Ashley has been the stable bedrock of my life and I am overjoyed to begin this next chapter of our family's story together.",
+    "Thank you to every person who has walked through these doors as a collaborator or tuned in to one of our videos as a viewer or made the choice to become a member of our community. Your support has meant the world to me and I hope that I had even a fraction of the positive impact on your life that you have had on mine. There have been a lot of ups and a few downs over the years, and I have learned so much from all of those experiences. I am eternally grateful that I had the opportunity to do what I love every day — an opportunity that I owe entirely to all of you.",
+    "Thank you.",
+    "Be nice and work hard.",
+    "Burnie"
 
 ]
 
@@ -30,12 +27,9 @@ indexVars = {
     "instagram" : "https://www.instagram.com/burnie/",
     "twitter" : "https://www.twitter.com/burnie",
     "email" : "mailto:kellan@edgy.org",
-    "site_name" : "Joe's Blog",
-    "right_col_img" : "https://images.ctfassets.net/izjiv8mj8dix/2LToZKzzlJ1HwibI8WVzxe/daa1a9040991fa4b17d76f036b234701/desilesphotography-105.jpg?w=2560&h=1707&q=80&fm=webp",
-    "img_alt" : "existing joe",
-    "img_width" : "250px",
-    "img_height" : "675px",
-    "left_col" : "Perimenopause and Menopause Essentials",
+    "site_name" : "burnie.com",
+    "right_col_img" : "static/BURNIE.jpeg",
+    "left_col" : "gg new map",
     "paragraphs" : indexParagraphs
 }
 
