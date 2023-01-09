@@ -1,8 +1,19 @@
 from flask import Flask, render_template, request
+import io
+import requests
+from PIL import Image
 
 app = Flask(__name__)
 
+def getsizes(url):
+    image_content = requests.get(url).content
+    image_stream = io.BytesIO(image_content)
+    img = Image.open(image_stream)
+    return img.size
+
 baseVars = {
+    "navBtnClass" : "btn btn-primary",
+    "pages" : [("Home", "/"), ("About", "/about")],
     "navbar_right" : "so much more than a body coach",
     "copyright" : "©Copyright 2022. All rights reserved."
 }
@@ -23,6 +34,7 @@ indexParagraphs = [
 ]
 
 indexVars = {
+    "smBtnClass" : "btn btn-primary",
     "head_img" : "static/HomeHeader.png",
     "head_height" : "400px",
     "head_color" : "rgba(0, 20, 74, 0.5)",
@@ -33,8 +45,8 @@ indexVars = {
     "site_name" : "Joe's Blog",
     "right_col_img" : "https://images.ctfassets.net/izjiv8mj8dix/2LToZKzzlJ1HwibI8WVzxe/daa1a9040991fa4b17d76f036b234701/desilesphotography-105.jpg?w=2560&h=1707&q=80&fm=webp",
     "img_alt" : "existing joe",
-    "img_width" : "250px",
-    "img_height" : "675px",
+    "img_width" : getsizes("https://images.ctfassets.net/izjiv8mj8dix/2LToZKzzlJ1HwibI8WVzxe/daa1a9040991fa4b17d76f036b234701/desilesphotography-105.jpg?w=2560&h=1707&q=80&fm=webp")[0]/10,
+    "img_height" : getsizes("https://images.ctfassets.net/izjiv8mj8dix/2LToZKzzlJ1HwibI8WVzxe/daa1a9040991fa4b17d76f036b234701/desilesphotography-105.jpg?w=2560&h=1707&q=80&fm=webp")[1]/10,
     "left_col" : "Perimenopause and Menopause Essentials",
     "paragraphs" : indexParagraphs
 }

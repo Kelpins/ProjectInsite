@@ -7,11 +7,11 @@
     <link href="static/style.css" rel="stylesheet">
 
     <nav id="header-nav" class="m-3">
-        <a href="/">Home</a>
-        <a href="/about">About</a>
+        {% for page in pages %}
+        <a href="{{page[1]}}" class="{{navBtnClass}}">{{page[0]}}</a>
+        {% endfor %}
         {# so much more than a dude playing the cowbell #}
-        <p id="cowbell" class="right"> {{navbar_right}}
-        </p>
+        <p id="cowbell" class="right"> {{navbar_right}} </p>
     </nav>
 
     {% block title %}
@@ -37,21 +37,19 @@
     </div>
 
     <!-- Footer -->
-    <footer class="text-center flat-footer" 
-
-        >
+    <footer class="text-center flat-footer">
         
         <div id="footer-contents" class="container p-3">
         
             <!-- Home/About -->
             <nav id="footer-nav">
-                <a href="/">Home</a>
-                <a href="/about">About</a>
+                {% for page in pages %}
+                <a href="{{page[1]}}">{{page[0]}}</a>
+                {% endfor %}
             </nav>
             <!-- Copyright -->
             {# ©Copyright 2022. All rights reserved. #}
-            <p id="copyright" class="p-3" >{{copyright}}
-            </p>
+            <p id="copyright" class="p-3">{{copyright}}</p>
             <!-- Privacy Policy -->
             <a id="privacy-policy" href="/privacy-policy">Privacy Policy</a>
         </div>
