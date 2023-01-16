@@ -73,7 +73,18 @@
         <div id="mid-text" class="col-6">
             <!-- Text -->
             {% for paragraph in paragraphs %}
-                <p>{{paragraph}}</p>
+                <p style="
+                
+                {% for value in paragraph['style'] %}
+                    {{value}}
+                    {% if loop.index%2 == 1 %}
+                        :
+                    {% else %}
+                        ;
+                    {% endif %}
+                {% endfor %}
+                
+                ">{{paragraph["text"]}}</p>
             {% endfor %}
         </div>
         <!-- Column 3 -->
