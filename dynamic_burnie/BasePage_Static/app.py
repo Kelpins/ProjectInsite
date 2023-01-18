@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import io
 import requests
 from PIL import Image
+import sys
 
 app = Flask(__name__)
 
@@ -13,7 +14,7 @@ def getsizes(url):
 
 baseVars = {
     "navBtnClass" : "btn btn-primary",
-    "pages" : [("Home", "/"), ("About", "/about")],
+    "pages" : [("Home", "/index"), ("About", "/about")],
     "navbar_right" : "so much more than a body coach",
     "copyright" : "©Copyright 2022. All rights reserved."
 }
@@ -142,6 +143,52 @@ privacyVars.update(baseVars)
 
 #Routers
 @app.route('/')
+def form():
+    formVars = {
+        "baseVars" : baseVars,
+        "indexVars" : indexVars,
+        "aboutVars" : aboutVars,
+        "privacyVars" : privacyVars,
+    }
+    return render_template('form.html.j2', **formVars)
+
+@app.route('/generate', methods=["POST"])
+def generateWebsite():
+    website_data = request.form
+    print(website_data)
+    for item in website_data:
+        key = item
+        value = website_data[item]
+        if key[0] == "b":
+            if key[1] == "-":
+                baseVars[key[2:]] = value
+            else:
+                return "SOMETHING BORKED!!! -- 000"
+        elif key[0] == "i":
+            if key[1] == "-":
+                indexVars[key[2:]] = value
+            elif key[1] == "p":
+                print(key)
+                indexVars["paragraphs"][int(key[2])][key[4:]] = value
+            else:
+                return "SOMETHING BORKED!!! -- 001"
+        elif key[0] == "a":
+            if key[1] == "-":
+                aboutVars[key[2:]] = value
+            elif key[1] == "t":
+                aboutVars["topCards"][int(key[2])][key[4:]] = value
+            elif key[1] == "b":
+                aboutVars["bottomCards"][int(key[2])-3][key[4:]] = value
+            else:
+                return "SOMETHING BORKED!!! -- 002"
+        elif key[0] == "p":
+            if key[1] == "-":
+                privacyVars[key[1:]] = value
+            else:
+                return "SOMETHING BORKED!!! -- 003"
+    return redirect('/index')
+
+@app.route('/index')
 def index():
     return render_template('index.html.j2', **indexVars)
 

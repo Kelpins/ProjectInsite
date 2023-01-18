@@ -1,0 +1,128 @@
+{% extends "base.html.j2" %}
+
+
+{% block title %}
+
+<title>Form</title>
+
+{% endblock title %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+
+<div id="form" class="center">
+    <h1>Create A Website:</h1>
+    <hr>
+    <form method="POST" action="./generate">
+        <div id="baseForm">
+            <h3>Base Page:</h3>
+            <br>
+            Navbar Right Text:
+            <input name="b-navbar_right" type="text" value="{{baseVars['navbar_right']}}">
+            <br>
+            Footer Copyright Text:
+            <input name="b-copyright" type="text" value="{{baseVars['copyright']}}">
+        </div>
+        <br>
+        <hr>
+        <br>
+        <div id="indexForm">
+            <h3>Home Page:</h3>
+            <br>
+            Site Name:
+            <input name="i-site_name" type="text" value="{{indexVars['site_name']}}">
+            <br>
+            Instagram Link:
+            <input name="i-instagram" type="text" value="{{indexVars['instagram']}}">
+            <br>
+            Twitter Link:
+            <input name="i-twitter" type="text" value="{{indexVars['twitter']}}">
+            <br>
+            Email:
+            <input name="i-email" type="text" value="{{indexVars['email']}}">
+            <br>
+            Left Column Header:
+            <input name="i-left_col" type="text" value="{{indexVars['left_col']}}">
+            <br>
+            <br>
+            <br>
+            <div id="paragraphs">
+                <h4>Paragraphs:</h4>
+                <br>
+                {% for paragraph in indexVars['paragraphs'] %}
+                <h5>Paragraph {{loop.index}}:</h5>
+                Paragraph Text:
+                <input name="ip{{loop.index0}}-text" type="text" value="{{indexVars['paragraphs'][loop.index0]['text']}}">
+                <br>
+                {% endfor %}
+            </div>
+            
+        </div>
+        <br>
+        <hr>
+        <br>
+        <div id="aboutForm">
+            <h3>About Page:</h3>
+            <br>
+            Header Blurb:
+            <input name="a-head_blurb" type="text" value="{{aboutVars['head_blurb']}}">
+            <br>
+            Body Title:
+            <input name="a-body_title" type="text" value="{{aboutVars['body_title']}}">
+            <br>
+            Body Subtitle:
+            <input name="a-body_subtitle" type="text" value="{{aboutVars['body_subtitle']}}">
+            <br>
+            <br>
+            <br>
+            <div id="aboutCards">
+                <h4>About Cards:</h4>
+                <br>
+                {% for card in aboutVars["topCards"] %}
+                <h5>Card {{loop.index}}:</h5>
+                Card Title:
+                <input name="at{{loop.index0}}-heading" type="text" value="{{aboutVars['topCards'][loop.index0]['heading']}}">
+                <br>
+                Card Text:
+                <input name="at{{loop.index0}}-text" type="text" value="{{aboutVars['topCards'][loop.index0]['text']}}">
+                <br>
+                {% endfor %}
+                {% for card in aboutVars["bottomCards"] %}
+                <h5>Card {{aboutVars["topCards"]|length + loop.index}}:</h5>
+                Card Title:
+                <input name="ab{{aboutVars['topCards']|length + loop.index0}}-heading" type="text" value="{{aboutVars['bottomCards'][loop.index0]['heading']}}">
+                <br>
+                Card Text:
+                <input name="ab{{aboutVars['topCards']|length + loop.index0}}-text" type="text" value="{{aboutVars['bottomCards'][loop.index0]['text']}}">
+                <br>
+                {% endfor %}
+            </div>
+        </div>
+        <br>
+        <hr>
+        <br>
+        <div id="privacyForm">
+            <h3>Privacy Policy Page:</h3>
+            <br>
+            Header Blurb:
+            <input name="p-head_blurb" type="text" value="{{privacyVars['head_blurb']}}">
+            <br>
+            Body Text:
+            <input name="p-body_text" type="text" value="{{privacyVars['body_text']}}">
+        </div>
+        <br>
+        <hr>
+        <br>
+        <div id="end">
+            <input type="submit" class="btn btn-success" value="Generate Website!">
+        </div>
+    </form>
+</div>
+
+{% endblock %}
+
+{% block foot%}
+
+{% endblock %}
