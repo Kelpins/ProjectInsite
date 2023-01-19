@@ -3,17 +3,17 @@ import io
 import requests
 from PIL import Image as fja
 import sys
-from tkinter import *
-win = Tk()
 
 app = Flask(__name__)
 
+
 def getsizes(url):
+    
     image_content = requests.get(url).content
     image_stream = io.BytesIO(image_content)
     img = fja.open(image_stream)
     size = img.size
-    screenWidth = win.winfo_screenwidth()
+    screenWidth = 1680
     print("Screen Width: " + str(screenWidth))
     width = size[0]
     height = ((screenWidth/4) * size[1]) / width
@@ -46,7 +46,7 @@ indexParagraphs2 = [
 
     {"text" : "In this guest blog post, Dr Louise Newson explains the essentials of perimenopause and menopause and talks about how exercise and good nutrition can help with the symptoms."},
     {"text" : "For decades, the menopause has been a taboo and there has been a huge amount of misinformation and misconceptions about treatment options, especially hormone replacement therapy (HRT). This has resulted in women's health being far worse than it could be otherwise. If more women were given the right advice and treatment based on the available evidence, women's health would improve and health costs to the NHS and other healthcare systems globally would also dramatically reduce."},
-    {"text" : "What is the menopause?", "style" : ["font-weight", "bold", "color", "red"]},
+    {"text" : "What is the menopause?", "style" : ["font-weight", "bold"]},
     {"text" : "The menopause is when the ovaries stop producing eggs and levels of hormones oestrogen, progesterone and testosterone fall."},
     {"text" : "The definition of menopause is when a woman hasn't had a period for 12 months, and the average age of the menopause in the UK is 51. However, it's really important to state that it doesn't just happen in mid-life: menopause before 45 is known as an early menopause, while menopause before the age of 40 is known as premature ovarian insufficiency (POI)."},
     {"text" : "POI is a lot more common than most people think: it affects about 1 in 100 women under the age of 40, and 1 in 1,000 women under 30. Even girls in their teens can be perimenopausal or menopausal."},
@@ -167,26 +167,33 @@ def generateWebsite():
     for item in website_data:
         key = item
         value = website_data[item]
-        if key[0] == "b":
-            if key[1] == "-":
-                baseVars[key[2:]] = value
+        id = key.split("-")[0] + "-"
+        name = key.split("-")[1]
+
+        if id[0] == "b":
+            if id[1] == "-":
+                baseVars[name] = value
             else:
                 return "SOMETHING BORKED!!! -- 000"
-        elif key[0] == "i":
-            if key[1] == "-":
-                indexVars[key[2:]] = value
+        elif id[0] == "i":
+            if id[1] == "-":
+                indexVars[name] = value
             elif key[1] == "p":
+                num = id.split("-")[0].split("p")[1]
                 print(key)
-                indexVars["paragraphs"][int(key[2])][key[4:]] = value
+                print(value)
+                indexVars["paragraphs"][int(num)][name] = value
             else:
                 return "SOMETHING BORKED!!! -- 001"
-        elif key[0] == "a":
-            if key[1] == "-":
-                aboutVars[key[2:]] = value
-            elif key[1] == "t":
-                aboutVars["topCards"][int(key[2])][key[4:]] = value
-            elif key[1] == "b":
-                aboutVars["bottomCards"][int(key[2])-3][key[4:]] = value
+        elif id[0] == "a":
+            if id[1] == "-":
+                aboutVars[name] = value
+            elif id[1] == "t":
+                num = id.split("-")[0].split("t")[1]
+                aboutVars["topCards"][int(num)][name] = value
+            elif id[1] == "b":
+                num = id.split("-")[0].split("b")[1]
+                aboutVars["bottomCards"][int(num)][name] = value
             else:
                 return "SOMETHING BORKED!!! -- 002"
         elif key[0] == "p":
@@ -195,6 +202,11 @@ def generateWebsite():
             else:
                 return "SOMETHING BORKED!!! -- 003"
     return redirect('/index')
+
+@app.route('/addParagraph')
+def addParagraph():
+    indexVars["paragraphs"].append({"text" : ""})
+    return redirect('/')
 
 @app.route('/index')
 def index():
