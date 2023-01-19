@@ -9,7 +9,7 @@
     <nav id="header-nav" class="flexSpread m-3">
         <div id="links" class="flex">
             {% for page in pages %}
-            <a href="{{page[1]}}" class="{{navBtnClass}}">{{page[0]}}</a>
+            <a href="{{page['Link']}}" class="{{navBtnClass}}">{{page['Name']}}</a>
             {% endfor %}
             <a href="/" class="btn btn-danger">Back To Form</a>
         </div>

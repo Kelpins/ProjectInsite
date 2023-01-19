@@ -3,6 +3,7 @@ import io
 import requests
 from PIL import Image as fja
 import sys
+import json
 
 app = Flask(__name__)
 
@@ -14,33 +15,20 @@ def getsizes(url):
     img = fja.open(image_stream)
     size = img.size
     screenWidth = 1680
-    print("Screen Width: " + str(screenWidth))
     width = size[0]
     height = ((screenWidth/4) * size[1]) / width
     results = [screenWidth/4, height]
     return results
 
+"""
 baseVars = {
+    
     "navBtnClass" : "btn btn-primary",
     "pages" : [("Home", "/index"), ("About", "/about")],
     "navbar_right" : "so much more than a body coach",
     "copyright" : "©Copyright 2022. All rights reserved."
+    
 }
-
-indexParagraphs = [
-
-    "In this guest blog post, Dr Louise Newson explains the essentials of perimenopause and menopause and talks about how exercise and good nutrition can help with the symptoms."
-    "For decades, the menopause has been a taboo and there has been a huge amount of misinformation and misconceptions about treatment options, especially hormone replacement therapy (HRT). This has resulted in women's health being far worse than it could be otherwise. If more women were given the right advice and treatment based on the available evidence, women's health would improve and health costs to the NHS and other healthcare systems globally would also dramatically reduce.",
-    "What is the menopause?",
-    "The menopause is when the ovaries stop producing eggs and levels of hormones oestrogen, progesterone and testosterone fall.",
-    "The definition of menopause is when a woman hasn't had a period for 12 months, and the average age of the menopause in the UK is 51. However, it's really important to state that it doesn't just happen in mid-life: menopause before 45 is known as an early menopause, while menopause before the age of 40 is known as premature ovarian insufficiency (POI).",
-    "POI is a lot more common than most people think: it affects about 1 in 100 women under the age of 40, and 1 in 1,000 women under 30. Even girls in their teens can be perimenopausal or menopausal.",
-    "For most women with POI, the underlying cause is unknown, but it can be triggered by events such as having your ovaries removed, a hysterectomy, radiotherapy to the pelvic area as a treatment for cancer or if you have received certain types of chemotherapy drugs that treat cancer. In addition, eating disorders can lead to early menopause in some women.",
-    "What is the perimenopause?",
-    "The perimenopause is the time directly before the menopause, when you still have periods, but the fluctuating and low hormone levels - especially oestrogen - can trigger a whole host of symptoms.",
-    "There is no blood test for the perimenopause or menopause - they can often be diagnosed by completing a Menopause Symptom Questionnaire."
-
-]
 
 indexParagraphs2 = [
 
@@ -54,11 +42,12 @@ indexParagraphs2 = [
     {"text" : "What is the perimenopause?", "style" : ["font-weight", "bold"]},
     {"text" : "The perimenopause is the time directly before the menopause, when you still have periods, but the fluctuating and low hormone levels - especially oestrogen - can trigger a whole host of symptoms."},
     {"text" : "There is no blood test for the perimenopause or menopause - they can often be diagnosed by completing a Menopause Symptom Questionnaire."}
-
-
 ]
 
 indexVars = {
+    "isDict" : "True"
+
+
     "smBtnClass" : "btn btn-primary",
     "head_img" : "static/HomeHeader.png",
     "head_height" : "400px",
@@ -77,6 +66,8 @@ indexVars = {
 }
 
 topCards = [
+
+
     # block 1
     {
         "img" : "static/LeaningBurnie.jpg",
@@ -101,6 +92,8 @@ topCards = [
 ]
 
 bottomCards = [
+
+
     # block 4
     {
         "img" : "static/GunKids.jpg",
@@ -125,6 +118,9 @@ bottomCards = [
 ]
 
 aboutVars = {
+    "isDict" : "True"
+
+
     "head_img" : "static/AboutHeader.png",
     "head_height" : "700px",
     "head_color" : "rgba(21, 151, 238, 0.5)",
@@ -137,6 +133,9 @@ aboutVars = {
 }
 
 privacyVars = {
+    "isDict" : "True"
+
+
     "head_img" : "static/PrivacyHeader.png",
     "head_height" : "600px",
     "head_color" : "rgba(68, 68, 68, 0.5)",
@@ -144,6 +143,51 @@ privacyVars = {
     "head_blurb" : "Listen. You just mind your own beeswax and I'll mind mine.", 
     "body_text" : "Void in the EU. Don't even look at this or I'm calling the gendarmes, Pierre."
 }
+"""
+
+baseVars = {}
+indexVars = {}
+aboutVars = {}
+privacyVars = {}
+
+filepath = "static/template1.json"
+
+file = open(filepath)
+data = json.load(file)
+
+for i in data["baseVars"]:
+    key = i
+    value = data["baseVars"][i]
+    if str(value)[0:4] == "var-":
+        baseVars[key] = data[str(value)[4:]]
+    else:
+        baseVars[key] = value
+for i in data["indexVars"]:
+    key = i
+    value = data["indexVars"][i]
+    if str(value)[0:4] == "var-":
+        indexVars[key] = data[str(value)[4:]]
+    else:
+        indexVars[key] = value
+for i in data["aboutVars"]:
+    key = i
+    value = data["aboutVars"][i]
+    if str(value)[0:4] == "var-":
+        aboutVars[key] = data[str(value)[4:]]
+    else:
+        aboutVars[key] = value
+for i in data["privacyVars"]:
+    key = i
+    value = data["privacyVars"][i]
+    if str(value)[0:4] == "var-":
+        privacyVars[key] = data[str(value)[4:]]
+    else:
+        privacyVars[key] = value
+
+print(baseVars)
+print(indexVars)
+print(aboutVars)
+print(indexVars)
 
 indexVars.update(baseVars)
 aboutVars.update(baseVars)
@@ -163,7 +207,6 @@ def form():
 @app.route('/generate', methods=["POST"])
 def generateWebsite():
     website_data = request.form
-    print(website_data)
     for item in website_data:
         key = item
         value = website_data[item]
@@ -180,8 +223,6 @@ def generateWebsite():
                 indexVars[name] = value
             elif key[1] == "p":
                 num = id.split("-")[0].split("p")[1]
-                print(key)
-                print(value)
                 indexVars["paragraphs"][int(num)][name] = value
             else:
                 return "SOMETHING BORKED!!! -- 001"
