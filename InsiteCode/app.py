@@ -150,7 +150,7 @@ indexVars = {}
 aboutVars = {}
 privacyVars = {}
 
-filepath = "static/template1.json"
+filepath = "static/template2.json"
 
 file = open(filepath)
 data = json.load(file)
@@ -158,29 +158,31 @@ data = json.load(file)
 for i in data["baseVars"]:
     key = i
     value = data["baseVars"][i]
-    if str(value)[0:4] == "var-":
-        baseVars[key] = data[str(value)[4:]]
+    if str(value).split("*****")[0] == "var":
+        baseVars[key] = data[str(value).split("*****")[1]]
     else:
         baseVars[key] = value
 for i in data["indexVars"]:
     key = i
     value = data["indexVars"][i]
-    if str(value)[0:4] == "var-":
-        indexVars[key] = data[str(value)[4:]]
+    if str(value).split("*****")[0] == "var":
+        indexVars[key] = data[str(value).split("*****")[1]]
+    elif str(value).split("*****")[0] == "func":
+        indexVars[key] = eval(str(value).split("*****")[1])
     else:
         indexVars[key] = value
 for i in data["aboutVars"]:
     key = i
     value = data["aboutVars"][i]
-    if str(value)[0:4] == "var-":
-        aboutVars[key] = data[str(value)[4:]]
+    if str(value).split("*****")[0] == "var":
+        aboutVars[key] = data[str(value).split("*****")[1]]
     else:
         aboutVars[key] = value
 for i in data["privacyVars"]:
     key = i
     value = data["privacyVars"][i]
-    if str(value)[0:4] == "var-":
-        privacyVars[key] = data[str(value)[4:]]
+    if str(value).split("*****")[0] == "var":
+        privacyVars[key] = data[str(value).split("*****")[1]]
     else:
         privacyVars[key] = value
 
