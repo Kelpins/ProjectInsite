@@ -263,37 +263,6 @@ def about():
 def privacy():
     return render_template('privacy-policy.html.j2', **privacyVars)
 
-# @app.route('/register')
-# def register():
-#     return render_template('register.html.j2')
-#
-# @app.route('/create')
-# def namePage():
-#     return render_template('name.html.j2')
-#
-# @app.route('/upload', methods=["GET", "POST"])
-# def uploadPage():
-#     name = request.values.get("websiteName")
-#     type = request.values.get("webType")
-#     webData.append(name)
-#     webData.append(type)
-#     return render_template('upload.html.j2')
-
-#@app.route('/templates', methods=["GET", "POST"])
-#def templatePage():
-#    files = request.values.get("files")
-#    webData.append(files)
-#    return render_template('templates.html.j2')
-
-# @app.route('/editwebsite', methods=["GET", "POST"])
-# def create():
-#     return render_template('editwebsite.html.j2', name=webData[0], webType=webData[1], files=webData[2])
-#
-# @app.route('/editwebsite', methods=["GET", "POST"])
-# def generateWebsite():
-#     name = request.values.get("websiteName")
-#     return render_template('editwebsite.html.j2', name=name)
-
 """
 @app.route('/test', methods=["POST"])
 def test():
