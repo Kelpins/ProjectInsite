@@ -20,131 +20,6 @@ def getsizes(url):
     results = [screenWidth/4, height]
     return results
 
-"""
-baseVars = {
-    
-    "navBtnClass" : "btn btn-primary",
-    "pages" : [("Home", "/index"), ("About", "/about")],
-    "navbar_right" : "so much more than a body coach",
-    "copyright" : "©Copyright 2022. All rights reserved."
-    
-}
-
-indexParagraphs2 = [
-
-    {"text" : "In this guest blog post, Dr Louise Newson explains the essentials of perimenopause and menopause and talks about how exercise and good nutrition can help with the symptoms."},
-    {"text" : "For decades, the menopause has been a taboo and there has been a huge amount of misinformation and misconceptions about treatment options, especially hormone replacement therapy (HRT). This has resulted in women's health being far worse than it could be otherwise. If more women were given the right advice and treatment based on the available evidence, women's health would improve and health costs to the NHS and other healthcare systems globally would also dramatically reduce."},
-    {"text" : "What is the menopause?", "style" : ["font-weight", "bold"]},
-    {"text" : "The menopause is when the ovaries stop producing eggs and levels of hormones oestrogen, progesterone and testosterone fall."},
-    {"text" : "The definition of menopause is when a woman hasn't had a period for 12 months, and the average age of the menopause in the UK is 51. However, it's really important to state that it doesn't just happen in mid-life: menopause before 45 is known as an early menopause, while menopause before the age of 40 is known as premature ovarian insufficiency (POI)."},
-    {"text" : "POI is a lot more common than most people think: it affects about 1 in 100 women under the age of 40, and 1 in 1,000 women under 30. Even girls in their teens can be perimenopausal or menopausal."},
-    {"text" : "For most women with POI, the underlying cause is unknown, but it can be triggered by events such as having your ovaries removed, a hysterectomy, radiotherapy to the pelvic area as a treatment for cancer or if you have received certain types of chemotherapy drugs that treat cancer. In addition, eating disorders can lead to early menopause in some women."},
-    {"text" : "What is the perimenopause?", "style" : ["font-weight", "bold"]},
-    {"text" : "The perimenopause is the time directly before the menopause, when you still have periods, but the fluctuating and low hormone levels - especially oestrogen - can trigger a whole host of symptoms."},
-    {"text" : "There is no blood test for the perimenopause or menopause - they can often be diagnosed by completing a Menopause Symptom Questionnaire."}
-]
-
-indexVars = {
-    "isDict" : "True"
-
-
-    "smBtnClass" : "btn btn-primary",
-    "head_img" : "static/HomeHeader.png",
-    "head_height" : "400px",
-    "head_color" : "rgba(0, 20, 74, 0.5)",
-    "head_img_pos" : "61% 21%",
-    "instagram" : "https://www.instagram.com/burnie/",
-    "twitter" : "https://www.twitter.com/burnie",
-    "email" : "mailto:kellan@edgy.org",
-    "site_name" : "Joe's Blog",
-    "right_col_img" : "https://images.ctfassets.net/izjiv8mj8dix/2LToZKzzlJ1HwibI8WVzxe/daa1a9040991fa4b17d76f036b234701/desilesphotography-105.jpg?w=2560&h=1707&q=80&fm=webp",
-    "img_alt" : "existing joe",
-    "img_width" : getsizes("https://images.ctfassets.net/izjiv8mj8dix/2LToZKzzlJ1HwibI8WVzxe/daa1a9040991fa4b17d76f036b234701/desilesphotography-105.jpg?w=2560&h=1707&q=80&fm=webp")[0],
-    "img_height" : getsizes("https://images.ctfassets.net/izjiv8mj8dix/2LToZKzzlJ1HwibI8WVzxe/daa1a9040991fa4b17d76f036b234701/desilesphotography-105.jpg?w=2560&h=1707&q=80&fm=webp")[1],
-    "left_col" : "Perimenopause and Menopause Essentials",
-    "paragraphs" : indexParagraphs2
-}
-
-topCards = [
-
-
-    # block 1
-    {
-        "img" : "static/LeaningBurnie.jpg",
-        "img_name" : "leaning burnie",
-        "heading" : "Smooth",
-        "text" : "Writer. Director. Father. One hundred percent lifetime field goal kicker. Entrepreneur. Actor. Cheeseburger. Large Coke. To Go."
-    },
-    # block 2
-    {
-        "img" : "static/CoolBurnie.jpg",
-        "img_name" : "cool burnie",
-        "heading" : "Self-dressing",
-        "text" : "Zippers. Buttons. Nothing curbs his pure passion for putting on clothes to protect himself from the elements."
-    },
-    # block 3
-    {
-        "img" : "static/YoungBurnie.jpg",
-        "img_name" : "young burnie top",
-        "heading" : "1400 on the SAT",
-        "text" : "Suck it, Bobby. You had to go to Tech."
-    }
-]
-
-bottomCards = [
-
-
-    # block 4
-    {
-        "img" : "static/GunKids.jpg",
-        "img_name" : "gun kids",
-        "heading" : "Prepared for the future with weaponized youth",
-        "text" : "Radicalizing children since 2002. Volume discounts."
-    },
-    # block 5
-    {
-        "img" : "static/Wife.jpg",
-        "img_name" : "wife",
-        "heading" : "Wife. Now with butt",
-        "text" : "She doesn't know this was posted. Exhibit A, Divorce Proceedings."
-    },
-    # block 6
-    {
-        "img" : "static/YoungBurnie2.jpg",
-        "img_name" : "young burnie bottom",
-        "heading" : "Three pieces of wide collared manhood",
-        "text" : "While you were reading this, he stole your girl. No take backs, champ."
-    }
-]
-
-aboutVars = {
-    "isDict" : "True"
-
-
-    "head_img" : "static/AboutHeader.png",
-    "head_height" : "700px",
-    "head_color" : "rgba(21, 151, 238, 0.5)",
-    "head_img_pos" : "57% 46%",
-    "head_blurb" : "You ever have a dream so boring, that in it you were reading the About page on a middle-aged influencer's website?",
-    "body_title" : "Our Commitment to Excellents",
-    "body_subtitle" : "Elusive. Gentle. Sublime. Sanguine. Words.",
-    "topCards" : topCards,
-    "bottomCards" : bottomCards
-}
-
-privacyVars = {
-    "isDict" : "True"
-
-
-    "head_img" : "static/PrivacyHeader.png",
-    "head_height" : "600px",
-    "head_color" : "rgba(68, 68, 68, 0.5)",
-    "head_img_pos" : "51% 35%",
-    "head_blurb" : "Listen. You just mind your own beeswax and I'll mind mine.", 
-    "body_text" : "Void in the EU. Don't even look at this or I'm calling the gendarmes, Pierre."
-}
-"""
-
 baseVars = {}
 indexVars = {}
 aboutVars = {}
@@ -218,12 +93,17 @@ def generateWebsite():
         if id[0] == "b":
             if id[1] == "-":
                 baseVars[name] = value
+            elif id[1] == "p":
+                num = id.split("-")[0].split("p")[1]
+                print(baseVars["pages"])
+                baseVars["pages"][int(num)][str(name)] = value
+                print(baseVars)
             else:
                 return "SOMETHING BORKED!!! -- 000"
         elif id[0] == "i":
             if id[1] == "-":
                 indexVars[name] = value
-            elif key[1] == "p":
+            elif id[1] == "p":
                 num = id.split("-")[0].split("p")[1]
                 indexVars["paragraphs"][int(num)][name] = value
             else:
@@ -239,8 +119,8 @@ def generateWebsite():
                 aboutVars["bottomCards"][int(num)][name] = value
             else:
                 return "SOMETHING BORKED!!! -- 002"
-        elif key[0] == "p":
-            if key[1] == "-":
+        elif id[0] == "p":
+            if id[1] == "-":
                 privacyVars[key[1:]] = value
             else:
                 return "SOMETHING BORKED!!! -- 003"
@@ -249,6 +129,11 @@ def generateWebsite():
 @app.route('/addParagraph')
 def addParagraph():
     indexVars["paragraphs"].append({"text" : ""})
+    return redirect('/')
+
+@app.route('/addPage')
+def addPage():
+    baseVars["pages"].append({"Name" : "", "Link" : ""})
     return redirect('/')
 
 @app.route('/index')

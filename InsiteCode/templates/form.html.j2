@@ -18,6 +18,20 @@
     <form method="POST" action="./generate">
         <div id="baseForm">
             <h3>Base Page:</h3>
+            Pages:
+            <br>
+            {% for page in baseVars['pages'] %}
+            <div class="center flex">
+                Page {{loop.index}} Name:
+                <input name="bp{{loop.index0}}-Name" type="text" value="{{page['Name']}}">
+                Page {{loop.index}} Link:
+                <input name="bp{{loop.index0}}-Link" type="text" value="{{page['Link']}}">
+                <a href="deletePage" class="btn btn-danger">X</a>
+            </div>
+            <br>
+            <br>
+            {% endfor %}
+            <a href="addPage" class="btn btn-success">+</a>
             <br>
             Navbar Right Text:
             <input name="b-navbar_right" type="text" value="{{baseVars['navbar_right']}}">
