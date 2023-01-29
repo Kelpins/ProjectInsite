@@ -10,15 +10,6 @@
 {% block head %}
 
 
-<!-- Header -->
-    <!-- Image Thing -->
-<!-- -->
-<!-- 
-    400px
-    rgba(0, 20, 74, 0.5)
-    static/HomeHeader.png
-    61% 21%
--->
 <div id = "header"
   class="slant-header container-fluid d-flex justify-content-center"
   style="
@@ -29,22 +20,15 @@
 
     "
 >
-    <!-- justify-content is y-axis, align-items is x-axis -->
     <div id="header-contents" 
         class="d-flex flex-column justify-content-center align-items-end"
         style="width: 75%"
     >
-        <!-- Heading -->
-        <!-- SM Links -->
-        <!-- burnie.com -->
+
         <div id="site-name" class="d-flex flex-row">
             <h1 class="mt-4 mb-4"> {{site_name}} </h1>
         </div>
-        <!--
-        https://www.instagram.com/burnie/
-        https://www.twitter.com/burnie
-        mailto:kellan@edgy.org
-        -->
+        
         <div id="SM-links" class="d-flex flex-row">
             <a class="m-2 {{smBtnClass}}" href="{{instagram}}">instagram</a>
             <a class="m-2 {{smBtnClass}}" href="{{twitter}}">twitter</a>
