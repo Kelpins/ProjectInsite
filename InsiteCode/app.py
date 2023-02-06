@@ -24,8 +24,9 @@ baseVars = {}
 indexVars = {}
 aboutVars = {}
 privacyVars = {}
+emptyVars = {}
 
-filepath = "static/template2.json"
+filepath = "static/template1.json"
 
 file = open(filepath)
 data = json.load(file)
@@ -46,6 +47,15 @@ for i in data["indexVars"]:
         indexVars[key] = eval(str(value).split("*****")[1])
     else:
         indexVars[key] = value
+for i in data["emptyVars"]:
+    key = i
+    value = data["emptyVars"][i]
+    if str(value).split("*****")[0] == "var":
+        emptyVars[key] = data[str(value).split("*****")[1]]
+    elif str(value).split("*****")[0] == "func":
+        emptyVars[key] = eval(str(value).split("*****")[1])
+    else:
+        emptyVars[key] = value
 for i in data["aboutVars"]:
     key = i
     value = data["aboutVars"][i]
@@ -61,14 +71,10 @@ for i in data["privacyVars"]:
     else:
         privacyVars[key] = value
 
-print(baseVars)
-print(indexVars)
-print(aboutVars)
-print(indexVars)
-
 indexVars.update(baseVars)
 aboutVars.update(baseVars)
 privacyVars.update(baseVars)
+emptyVars.update(baseVars)
 
 #Routers
 @app.route('/')
@@ -78,6 +84,7 @@ def form():
         "indexVars" : indexVars,
         "aboutVars" : aboutVars,
         "privacyVars" : privacyVars,
+        "emptyVars" : emptyVars,
     }
     return render_template('form.html.j2', **formVars)
 
@@ -85,6 +92,7 @@ def form():
 def generateWebsite():
     website_data = request.form
     for item in website_data:
+        print(item)
         key = item
         value = website_data[item]
         id = key.split("-")[0] + "-"
@@ -99,7 +107,7 @@ def generateWebsite():
                 baseVars["pages"][int(num)][str(name)] = value
                 print(baseVars)
             else:
-                return "SOMETHING BORKED!!! -- 000"
+                return "BASE BORKED!!!"
         elif id[0] == "i":
             if id[1] == "-":
                 indexVars[name] = value
@@ -107,7 +115,7 @@ def generateWebsite():
                 num = id.split("-")[0].split("p")[1]
                 indexVars["paragraphs"][int(num)][name] = value
             else:
-                return "SOMETHING BORKED!!! -- 001"
+                return "INDEX BORKED!!!"
         elif id[0] == "a":
             if id[1] == "-":
                 aboutVars[name] = value
@@ -118,12 +126,20 @@ def generateWebsite():
                 num = id.split("-")[0].split("b")[1]
                 aboutVars["bottomCards"][int(num)][name] = value
             else:
-                return "SOMETHING BORKED!!! -- 002"
+                return "ABOUT BORKED!!!"
         elif id[0] == "p":
             if id[1] == "-":
                 privacyVars[key[1:]] = value
             else:
-                return "SOMETHING BORKED!!! -- 003"
+                return "PRIVACY BORKED!!! -- 003"
+        elif id[0] == "e":
+            if id[1] == "-":
+                emptyVars[name] = value
+            elif id[1] == "p":
+                num = id.split("-")[0].split("p")[1]
+                emptyVars["paragraphs"][int(num)][name] = value
+            else:
+                return "EMPTY BORKED!!! -- 004"
     return redirect('/index')
 
 @app.route('/addParagraph')
@@ -135,15 +151,25 @@ def addParagraph():
 def addPage():
     baseVars["pages"].append({"Name" : "", "Link" : ""})
     return redirect('/')
+    
 
-@app.route('/index')
-def index():
-    return render_template('index.html.j2', **indexVars)
-
-@app.route('/about')
-def about():
-    return render_template('about.html.j2', **aboutVars)
-
-@app.route('/privacy-policy')
-def privacy():
-    return render_template('privacy-policy.html.j2', **privacyVars)
+@app.route('/<route>')
+def router(route):
+    print(baseVars)
+    pages = baseVars["pages"]
+    routes = []
+    for page in pages:
+        routes.append(page["Link"])
+    print(route + "HIASHDFLKIAHSDLJKFHAKSJHFGAKJSDFG")
+    print(routes)
+    if route in routes:
+        if route == "index":
+            return render_template('index.html.j2', **indexVars)
+        elif route == "about":
+            return render_template('about.html.j2', **aboutVars)
+        elif route == "privacy-policy":
+            return render_template('privacy-policy.html.j2', **privacyVars)
+        elif route == "empty":
+            return render_template('emptyPageTemplate.html.j2', **emptyVars)
+    else:
+        return "ILLEGAL PAGE!!!"

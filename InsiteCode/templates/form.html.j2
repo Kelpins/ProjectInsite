@@ -69,14 +69,15 @@
                 <div class="center flex">
                     <h5>Paragraph {{loop.index}}:</h5>
                     Paragraph Text:
-                    <input name="ip{{loop.index0}}-text" type="text" value="{{indexVars['paragraphs'][loop.index0]['text']}}">
+                    <input name="ip{{loop.index0}}-text" type="text"
+                        value="{{indexVars['paragraphs'][loop.index0]['text']}}">
                     <br>
                     <a href="deleteParagraph" class="btn btn-danger">X</a>
                 </div>
                 {% endfor %}
                 <a href="addParagraph" class="btn btn-success">+</a>
             </div>
-            
+
         </div>
         <br>
         <hr>
@@ -101,7 +102,8 @@
                 {% for card in aboutVars["topCards"] %}
                 <h5>Card {{loop.index}}:</h5>
                 Card Title:
-                <input name="at{{loop.index0}}-heading" type="text" value="{{aboutVars['topCards'][loop.index0]['heading']}}">
+                <input name="at{{loop.index0}}-heading" type="text"
+                    value="{{aboutVars['topCards'][loop.index0]['heading']}}">
                 <br>
                 Card Text:
                 <input name="at{{loop.index0}}-text" type="text" value="{{aboutVars['topCards'][loop.index0]['text']}}">
@@ -110,10 +112,12 @@
                 {% for card in aboutVars["bottomCards"] %}
                 <h5>Card {{aboutVars["topCards"]|length + loop.index}}:</h5>
                 Card Title:
-                <input name="ab{{loop.index0}}-heading" type="text" value="{{aboutVars['bottomCards'][loop.index0]['heading']}}">
+                <input name="ab{{loop.index0}}-heading" type="text"
+                    value="{{aboutVars['bottomCards'][loop.index0]['heading']}}">
                 <br>
                 Card Text:
-                <input name="ab{{loop.index0}}-text" type="text" value="{{aboutVars['bottomCards'][loop.index0]['text']}}">
+                <input name="ab{{loop.index0}}-text" type="text"
+                    value="{{aboutVars['bottomCards'][loop.index0]['text']}}">
                 <br>
                 {% endfor %}
             </div>
@@ -129,6 +133,45 @@
             <br>
             Body Text:
             <input name="p-body_text" type="text" value="{{privacyVars['body_text']}}">
+        </div>
+        <br>
+        <hr>
+        <br>
+        <div id="emptyForm">
+            <h3>Empty Page:</h3>
+            <br>
+            Page Title:
+            <input name="e-page_title" type="text" value="{{emptyVars['page_title']}}">
+            <br>
+            Page Header:
+            <input name="e-page_header" type="text" value="{{emptyVars['page_header']}}">
+            <br>
+            Page Subheader:
+            <input name="e-page_subheader" type="text" value="{{emptyVars['page_subheader']}}">
+            <br>
+            Text Header:
+            <input name="e-text_header" type="text" value="{{emptyVars['text_header']}}">
+            <br>
+            Text Subheader:
+            <input name="e-text_subheader" type="text" value="{{emptyVars['text_subheader']}}">
+            <br>
+            <br>
+            <br>
+            <div id="empty1_paragraphs">
+                <h4>Paragraphs:</h4>
+                <br>
+                {% for paragraph in emptyVars['paragraphs'] %}
+                <div class="center flex">
+                    <h5>Paragraph {{loop.index}}:</h5>
+                    Paragraph Text:
+                    <input name="e-p{{loop.index0}}-text" type="text"
+                        value="{{emptyVars['paragraphs'][loop.index0]['text']}}">
+                    <br>
+                    <a href="deleteParagraphEmpty1" class="btn btn-danger">X</a>
+                </div>
+                {% endfor %}
+                <a href="addParagraphEmpty1" class="btn btn-success">+</a>
+            </div>
         </div>
         <br>
         <hr>
