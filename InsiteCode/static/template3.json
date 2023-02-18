@@ -32,10 +32,10 @@
         "page_header" : "Menopause",
         "page_subheader" : "It's a real thing",
         "text_header" : "It's ok to have questions",
-        "text_subheader" : "We are not experts and our advice should not be listened to",
+        "text_subheader" : "We are not experts and our advice should not be followed",
         "paragraphs" : "var*****emptyParagraphs",
         "right_col_img" : "https://images.ctfassets.net/izjiv8mj8dix/2LToZKzzlJ1HwibI8WVzxe/daa1a9040991fa4b17d76f036b234701/desilesphotography-105.jpg?w=2560&h=1707&q=80&fm=webp",
-        "img_alt" : "",
+        "img_alt" : "crouching joe",
         "img_width" : "func*****getsizes('https://images.ctfassets.net/izjiv8mj8dix/2LToZKzzlJ1HwibI8WVzxe/daa1a9040991fa4b17d76f036b234701/desilesphotography-105.jpg?w=2560&h=1707&q=80&fm=webp')[0]",
         "img_height" : "func*****getsizes('https://images.ctfassets.net/izjiv8mj8dix/2LToZKzzlJ1HwibI8WVzxe/daa1a9040991fa4b17d76f036b234701/desilesphotography-105.jpg?w=2560&h=1707&q=80&fm=webp')[1]"
 
@@ -68,7 +68,7 @@
         "email" : "mailto:kellan@edgy.org",
         "site_name" : "burnie.com",
         "right_col_img" : "static/BURNIE.jpeg",
-        "img_alt" : "existing joe",
+        "img_alt" : "smiling burnie",
         "img_width" : "240px",
         "img_height" : "671px",
         "widthAndHeightCode" : "",

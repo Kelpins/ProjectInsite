@@ -104,9 +104,8 @@ def generateWebsite():
                 baseVars[name] = value
             elif id[1] == "p":
                 num = id.split("-")[0].split("p")[1]
-                # print(baseVars["pages"])
+                # Reformat baseVars["pages"] as a simple dictionary: keys are names, values are links    
                 baseVars["pages"][int(num)][str(name)] = value
-                # print(baseVars)
             else:
                 return "BASE BORKED!!!"
         elif id[0] == "i":
@@ -150,27 +149,27 @@ def addParagraph():
 
 @app.route('/addPage')
 def addPage():
+    # Reformat baseVars["pages"] as a simple dictionary: keys are names, values are links
     baseVars["pages"].append({"Name" : "", "Link" : ""})
     return redirect('/')
     
+@app.route('/privacy-policy')
+def privacy():
+    return render_template('privacy-policy.html.j2', **privacyVars)
 
 @app.route('/<route>')
 def router(route):
-    # print(baseVars)
+    # Reformat baseVars["pages"] as a simple dictionary: keys are names, values are links
     pages = baseVars["pages"]
     routes = []
     for page in pages:
         routes.append(page["Link"])
-    # print(route + "HIASHDFLKIAHSDLJKFHAKSJHFGAKJSDFG")
-    # print(routes)
     if route in routes:
         if route == "index":
             return render_template('index.html.j2', **indexVars)
         elif route == "about":
             return render_template('about.html.j2', **aboutVars)
-        elif route == "privacy-policy":
-            return render_template('privacy-policy.html.j2', **privacyVars)
-        # Make this a variable for whatever the new page is
+        # Pair a specific set of emptyVars with each page route
         else:
             return render_template('emptyTextPage.html.j2', **emptyVars)
     else:
