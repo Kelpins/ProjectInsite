@@ -67,12 +67,12 @@
         "twitter" : "https://www.twitter.com/burnie",
         "email" : "mailto:kellan@edgy.org",
         "site_name" : "Joe's Blog",
-        "right_col_img" : "https://images.ctfassets.net/izjiv8mj8dix/2LToZKzzlJ1HwibI8WVzxe/daa1a9040991fa4b17d76f036b234701/desilesphotography-105.jpg?w=2560&h=1707&q=80&fm=webp",
+        "right_col_img" : "static/BURNIE.jpeg",
         "img_alt" : "existing joe",
-        "img_width" : "func*****getsizes('https://images.ctfassets.net/izjiv8mj8dix/2LToZKzzlJ1HwibI8WVzxe/daa1a9040991fa4b17d76f036b234701/desilesphotography-105.jpg?w=2560&h=1707&q=80&fm=webp')[0]",
-        "img_height" : "func*****getsizes('https://images.ctfassets.net/izjiv8mj8dix/2LToZKzzlJ1HwibI8WVzxe/daa1a9040991fa4b17d76f036b234701/desilesphotography-105.jpg?w=2560&h=1707&q=80&fm=webp')[1]",
+        "img_width" : "func*****getsizes('static/BURNIE.jpeg')[0]",
+        "img_height" : "func*****getsizes('static/BURNIE.jpeg')[1]",
         "widthAndHeightCode" : "",
-        "left_col" : "Perimenopause and Menopause Essentials",
+        "left_col" : "gg new map",
         "paragraphs" : "var*****indexParagraphs"
     },
 
