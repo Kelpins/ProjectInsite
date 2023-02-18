@@ -172,6 +172,6 @@ def router(route):
             return render_template('privacy-policy.html.j2', **privacyVars)
         # Make this a variable for whatever the new page is
         else:
-            return render_template('emptyPageTemplate.html.j2', **emptyVars)
+            return render_template('emptyTextPage.html.j2', **emptyVars)
     else:
         return "ILLEGAL PAGE!!!"

@@ -9,16 +9,6 @@
 
 {% block head %}
 
-
-<!-- Header -->
-    <!-- Image Thing -->
-<!-- -->
-<!-- 
-    400px
-    rgba(0, 20, 74, 0.5)
-    static/HomeHeader.png
-    61% 21%
--->
 <div id = "header"
   class="slant-header container-fluid d-flex justify-content-center"
   style="
@@ -29,24 +19,14 @@
 
     "
 >
-    <!-- justify-content is y-axis, align-items is x-axis -->
     <div id="header-contents" 
         class="d-flex flex-column justify-content-center align-items-end"
         style="width: 75%"
     >
-        <!-- Heading -->
-        <!-- SM Links -->
-        <!-- burnie.com -->
-        <div id="site-name" class="d-flex flex-row">
-            <h1 class="mt-4 mb-4"> {{page_header}} </h1>
-            <br>
-            <h3> {{page_subheader}} </h3>
-        </div>
-        <!--
-        https://www.instagram.com/burnie/
-        https://www.twitter.com/burnie
-        mailto:kellan@edgy.org
-        -->
+
+        <h1 class="mt-4 mb-4"> {{page_header}} </h1>
+        <p class="mt-4 mb-4"> {{page_subheader}} </p>
+
     </div>
 </div>
 
@@ -62,7 +42,7 @@
 
 
         <!-- Column 1 -->
-        <div id="new-map" class="col-3">
+        <div id="left-col-text" class="col-3">
             <!-- Heading -->
             <h2> {{text_header}} </h2>
             <br>
@@ -87,7 +67,7 @@
             {% endfor %}
         </div>
         <!-- Column 3 -->
-        <div id="burnie-img" class="col-3">
+        <div id="right-col-img" class="col-3">
             <!-- Image -->
             <img src="{{right_col_img}}" alt="{{img_alt}}" width="{{img_width}}" height="{{img_height}}">
         </div>
