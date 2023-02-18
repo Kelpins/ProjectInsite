@@ -2,7 +2,7 @@
     "baseVars" : {
         "navBtnClass" : "btn btn-primary",
         "pages" : [{"Name" : "Home", "Link" : "index"}, {"Name" : "About", "Link" : "about"}, {"Name": "Menopause", "Link": "menopause" }],
-        "navbar_right" : "so much more than a body coach",
+        "navbar_right" : "so much more than a dude playing the cowbell",
         "copyright" : "©Copyright 2022. All rights reserved."
     },
 
@@ -66,11 +66,11 @@
         "instagram" : "https://www.instagram.com/burnie/",
         "twitter" : "https://www.twitter.com/burnie",
         "email" : "mailto:kellan@edgy.org",
-        "site_name" : "Joe's Blog",
+        "site_name" : "burnie.com",
         "right_col_img" : "static/BURNIE.jpeg",
         "img_alt" : "existing joe",
-        "img_width" : "func*****getsizes('static/BURNIE.jpeg')[0]",
-        "img_height" : "func*****getsizes('static/BURNIE.jpeg')[1]",
+        "img_width" : "240px",
+        "img_height" : "671px",
         "widthAndHeightCode" : "",
         "left_col" : "gg new map",
         "paragraphs" : "var*****indexParagraphs"
