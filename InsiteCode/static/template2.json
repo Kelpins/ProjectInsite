@@ -1,7 +1,7 @@
 {
     "baseVars" : {
         "navBtnClass" : "btn btn-primary",
-        "pages" : [{"Name" : "Home", "Link" : "/index"}, {"Name" : "About", "Link" : "/about"}],
+        "pages" : [{"Name" : "Home", "Link" : "index"}, {"Name" : "About", "Link" : "about"}],
         "navbar_right" : "so much more than a body coach",
         "copyright" : "©Copyright 2023. No rights reserved."
     },

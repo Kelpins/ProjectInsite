@@ -24,9 +24,10 @@ baseVars = {}
 indexVars = {}
 aboutVars = {}
 privacyVars = {}
+# Make emptyVars a list, with each entry being a specific page's vars
 emptyVars = {}
 
-filepath = "static/template1.json"
+filepath = "static/template3.json"
 
 file = open(filepath)
 data = json.load(file)
@@ -92,7 +93,7 @@ def form():
 def generateWebsite():
     website_data = request.form
     for item in website_data:
-        print(item)
+        # print(item)
         key = item
         value = website_data[item]
         id = key.split("-")[0] + "-"
@@ -103,9 +104,9 @@ def generateWebsite():
                 baseVars[name] = value
             elif id[1] == "p":
                 num = id.split("-")[0].split("p")[1]
-                print(baseVars["pages"])
+                # print(baseVars["pages"])
                 baseVars["pages"][int(num)][str(name)] = value
-                print(baseVars)
+                # print(baseVars)
             else:
                 return "BASE BORKED!!!"
         elif id[0] == "i":
@@ -155,13 +156,13 @@ def addPage():
 
 @app.route('/<route>')
 def router(route):
-    print(baseVars)
+    # print(baseVars)
     pages = baseVars["pages"]
     routes = []
     for page in pages:
         routes.append(page["Link"])
-    print(route + "HIASHDFLKIAHSDLJKFHAKSJHFGAKJSDFG")
-    print(routes)
+    # print(route + "HIASHDFLKIAHSDLJKFHAKSJHFGAKJSDFG")
+    # print(routes)
     if route in routes:
         if route == "index":
             return render_template('index.html.j2', **indexVars)
@@ -169,7 +170,8 @@ def router(route):
             return render_template('about.html.j2', **aboutVars)
         elif route == "privacy-policy":
             return render_template('privacy-policy.html.j2', **privacyVars)
-        elif route == "empty":
+        # Make this a variable for whatever the new page is
+        else:
             return render_template('emptyPageTemplate.html.j2', **emptyVars)
     else:
         return "ILLEGAL PAGE!!!"
