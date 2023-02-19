@@ -26,8 +26,9 @@ aboutVars = {}
 privacyVars = {}
 # Make emptyVars a list, with each entry being a specific page's vars
 emptyVars = {}
+newVars = {}
 
-filepath = "static/template3.json"
+filepath = "static/template4.json"
 
 file = open(filepath)
 data = json.load(file)
@@ -57,6 +58,21 @@ for i in data["emptyVars"]:
         emptyVars[key] = eval(str(value).split("*****")[1])
     else:
         emptyVars[key] = value
+# print(data["newVars"].keys())
+for page in data["newVars"].keys():
+    newVars[page] = {}
+    for i in data["newVars"][page]:
+        key = i
+        value = data["newVars"][page][i]
+        if str(value).split("*****")[0] == "var":
+            newVars[page][key] = data[str(value).split("*****")[1]]
+        elif str(value).split("*****")[0] == "func":
+            newVars[page][key] = eval(str(value).split("*****")[1])
+        else:
+            # print("Page: " + page)
+            # print("Key: " + key)
+            # print("Value: " + value)
+            newVars[page][key] = value
 for i in data["aboutVars"]:
     key = i
     value = data["aboutVars"][i]
@@ -76,6 +92,8 @@ indexVars.update(baseVars)
 aboutVars.update(baseVars)
 privacyVars.update(baseVars)
 emptyVars.update(baseVars)
+for page in newVars.keys():
+    newVars[page].update(baseVars)
 
 #Routers
 @app.route('/')
@@ -86,6 +104,7 @@ def form():
         "aboutVars" : aboutVars,
         "privacyVars" : privacyVars,
         "emptyVars" : emptyVars,
+        "newVars" : newVars
     }
     return render_template('form.html.j2', **formVars)
 
@@ -96,7 +115,8 @@ def generateWebsite():
         # print(item)
         key = item
         value = website_data[item]
-        id = key.split("-")[0] + "-"
+        prefix = key.split("-")[0]
+        id = prefix + "-"
         name = key.split("-")[1]
 
         if id[0] == "b":
@@ -127,12 +147,24 @@ def generateWebsite():
                 aboutVars["bottomCards"][int(num)][name] = value
             else:
                 return "ABOUT BORKED!!!"
-        elif id[0] == "p":
+        # Changed this because p applies to new pages
+        elif id[0] == "r":
             if id[1] == "-":
                 privacyVars[key[1:]] = value
             else:
                 return "PRIVACY BORKED!!! -- 003"
-        elif id[0] == "e":
+        # Change this stuff
+        elif prefix in newVars.keys():
+            # print("New page prefix: " + prefix)
+            if id[len(id)-1] == "-":
+                newVars[prefix][name] = value
+            elif id[len(id)-1] == "p":
+                num = id.split("-")[0].split("p")[1]
+                newVars[prefix]["paragraphs"][int(num)][name] = value
+            else:
+                return "New page BORKED!!! -- 004"
+        else:
+            print("Empty prefix " + prefix)
             if id[1] == "-":
                 emptyVars[name] = value
             elif id[1] == "p":
@@ -142,15 +174,22 @@ def generateWebsite():
                 return "EMPTY BORKED!!! -- 004"
     return redirect('/index')
 
+# Generalize this to also work for the new pages
 @app.route('/addParagraph')
 def addParagraph():
     indexVars["paragraphs"].append({"text" : ""})
     return redirect('/')
 
+# newPageCount = 0
+
 @app.route('/addPage')
 def addPage():
     # Reformat baseVars["pages"] as a simple dictionary: keys are names, values are links
-    baseVars["pages"].append({"Name" : "", "Link" : ""})
+    # Keep a counter and generate page names as "page1", "page2", etc.
+    newPageCount = len(newVars.keys()) + 1
+    baseVars["pages"].append({"Name" : "page"+str(newPageCount), "Link" : ""})
+    # baseVars["newPages"]["page"+str(newPageCount)] = {"Link": "", "Type": "text"}
+    newVars["page"+str(newPageCount)] = {}
     return redirect('/')
     
 @app.route('/privacy-policy')
@@ -162,14 +201,27 @@ def router(route):
     # Reformat baseVars["pages"] as a simple dictionary: keys are names, values are links
     pages = baseVars["pages"]
     routes = []
+    # newRoutes has new page links as keys and page names as values
+    newRoutes = {}
+    # print("All new pages: " + str(newVars.keys()))
     for page in pages:
         routes.append(page["Link"])
+        # print("Current page: " + page["Name"])
+        if page["Name"] in newVars.keys():
+            newRoutes[page["Link"]] = page["Name"]
+            # print("New routes found: " + str(newRoutes))
+
     if route in routes:
+        # Can this break if you change the page route in the submission form?
         if route == "index":
             return render_template('index.html.j2', **indexVars)
         elif route == "about":
             return render_template('about.html.j2', **aboutVars)
-        # Pair a specific set of emptyVars with each page route
+        # Pair a specific set of newVars with each page route
+        elif route in newRoutes.keys():
+            pageName = newRoutes[route]
+            # print("New page: " + pageName)
+            return render_template('emptyTextPage.html.j2', **newVars[pageName])
         else:
             return render_template('emptyTextPage.html.j2', **emptyVars)
     else:

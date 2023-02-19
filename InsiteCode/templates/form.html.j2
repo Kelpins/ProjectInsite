@@ -129,14 +129,63 @@
             <h3>Privacy Policy Page:</h3>
             <br>
             Header Blurb:
-            <input name="p-head_blurb" type="text" value="{{privacyVars['head_blurb']}}">
+            <input name="r-head_blurb" type="text" value="{{privacyVars['head_blurb']}}">
             <br>
             Body Text:
-            <input name="p-body_text" type="text" value="{{privacyVars['body_text']}}">
+            <input name="r-body_text" type="text" value="{{privacyVars['body_text']}}">
         </div>
         <br>
         <hr>
         <br>
+
+        {# For loop here for each empty page #}
+        {% for page in newVars.keys() %}
+        <div id="{{page}}Form">
+            
+            {# Use the page name as the id tag #}
+            <h3>{{page}}</h3>
+            <br>
+            Page Title:
+            <input name="{{page}}-page_title" type="text" value="{{newVars[page].get('page_title')}}">
+            <br>
+            Page Header:
+            <input name="{{page}}-page_header" type="text" value="{{newVars[page].get('page_header')}}">
+            <br>
+            Page Subheader:
+            <input name="{{page}}-page_subheader" type="text" value="{{newVars[page].get('page_subheader')}}">
+            <br>
+            Text Header:
+            <input name="{{page}}-text_header" type="text" value="{{newVars[page].get('text_header')}}">
+            <br>
+            Text Subheader:
+            <input name="{{page}}-text_subheader" type="text" value="{{newVars[page].get('text_subheader')}}">
+            <br>
+            <br>
+            <br>
+            <div id="{{page}}Paragraphs">
+                <h4>Paragraphs:</h4>
+                <br>
+                {# newVars[page]['paragraphs'] #}
+                {# newVars['{{page}}']['paragraphs'] #}
+                {# emptyVars['paragraphs'] #}
+                {% for paragraph in newVars[page].get('paragraphs', []) %}
+                <div class="center flex">
+                    <h5>Paragraph {{loop.index}}:</h5>
+                    Paragraph Text:
+                    <input name="{{page}}-p{{loop.index0}}-text" type="text"
+                        value="{{newVars[page].get('paragraphs')[loop.index0]['text']}}">
+                    <br>
+                    <a href="deleteParagraphEmpty1" class="btn btn-danger">X</a>
+                </div>
+                {% endfor %}
+                <a href="addParagraphEmpty1" class="btn btn-success">+</a>
+            </div>
+            <br>
+
+        </div>
+        {% endfor %}
+
+        <!--
         <div id="emptyForm">
             {# Jinjify all the e- prefixes so we can have e0-, e1-, etc. #}
             <h3>Empty Page:</h3>
@@ -174,6 +223,7 @@
                 <a href="addParagraphEmpty1" class="btn btn-success">+</a>
             </div>
         </div>
+        -->
         <br>
         <hr>
         <br>
