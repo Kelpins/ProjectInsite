@@ -1,7 +1,13 @@
 {
     "baseVars" : {
         "navBtnClass" : "btn btn-primary",
-        "pages" : [{"Name" : "Home", "Link" : "index"}, {"Name" : "About", "Link" : "about"}, {"Name" : "page1", "Link" : "menopause1"}, {"Name" : "page2", "Link" : "menopause2"}],
+        "pages" : 
+        {
+            "index" : {"Name" : "Home", "Link" : "index"}, 
+            "about" : {"Name" : "About", "Link" : "about"}, 
+            "page1" : {"Name" : "page1", "Link" : "menopause1"}, 
+            "page2" : {"Name" : "page2", "Link" : "menopause2"}
+        },
         "navbar_right" : "so much more than a dude playing the cowbell",
         "copyright" : "©Copyright 2022. All rights reserved."
     },

@@ -1,240 +1,256 @@
-{% extends "base.html.j2" %}
+<!DOCTYPE html>
+<html lang="en">
 
+{# This page longer extends base.html.j2, as the base template requires elements of baseVars, e.g. 'pages', and in the form template those elements are used as baseVars['pages'] #}
 
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link href="static/style.css" rel="stylesheet">
 {% block title %}
 
 <title>Form</title>
 
 {% endblock title %}
 
+</head>
+
+<body class="m-0">
+
 {% block head %}
 {% endblock %}
 
 {% block body %}
 
-<div id="form" class="center">
-    <h1>Create A Website:</h1>
-    <hr>
-    <form method="POST" action="./generate">
-        <div id="baseForm">
-            <h3>Base Page:</h3>
-            Pages:
-            <br>
-            {% for page in baseVars['pages'] %}
-            <div class="center flex">
-                Page {{loop.index}} Name:
-                <input name="bp{{loop.index0}}-Name" type="text" value="{{page['Name']}}">
-                Page {{loop.index}} Link:
-                <input name="bp{{loop.index0}}-Link" type="text" value="{{page['Link']}}">
-                <a href="deletePage" class="btn btn-danger">X</a>
+    <div id="form" class="center">
+        <h1>Create A Website:</h1>
+        <hr>
+        <form method="POST" action="./generate">
+            <div id="baseForm">
+                <h3>Base Page:</h3>
+                Pages:
+                <br>
+                {% for page in baseVars['pages'].keys() %}
+                <div class="center flex">
+                    {# Page is the page ID, use filter to capitalize #}
+                    {{page | capitalize}} Name:
+                    {# Change "bp{{page}}-field" to "b-{{page}}-field" because splitting on 'p' causes problems when we actually use p in page/field names #}
+                    <input name="b-{{page}}-Name" type="text" value="{{baseVars['pages'][page]['Name']}}">
+                    {{page | capitalize}} Link:
+                    <input name="b-{{page}}-Link" type="text" value="{{baseVars['pages'][page]['Link']}}">
+                    <a href="deletePage" class="btn btn-danger">X</a>
+                </div>
+                <br>
+                <br>
+                {% endfor %}
+                <a href="addPage" class="btn btn-success">+</a>
+                <br>
+                Navbar Right Text:
+                <input name="b-navbar_right" type="text" value="{{baseVars['navbar_right']}}">
+                <br>
+                Footer Copyright Text:
+                <input name="b-copyright" type="text" value="{{baseVars['copyright']}}">
             </div>
             <br>
+            <hr>
             <br>
+            <div id="indexForm">
+                <h3>Home Page:</h3>
+                <br>
+                Site Name:
+                <input name="i-site_name" type="text" value="{{indexVars['site_name']}}">
+                <br>
+                Instagram Link:
+                <input name="i-instagram" type="text" value="{{indexVars['instagram']}}">
+                <br>
+                Twitter Link:
+                <input name="i-twitter" type="text" value="{{indexVars['twitter']}}">
+                <br>
+                Email:
+                <input name="i-email" type="text" value="{{indexVars['email']}}">
+                <br>
+                Left Column Header:
+                <input name="i-left_col" type="text" value="{{indexVars['left_col']}}">
+                <br>
+                <br>
+                <br>
+                <div id="paragraphs">
+                    <h4>Paragraphs:</h4>
+                    <br>
+                    {% for paragraph in indexVars['paragraphs'] %}
+                    <div class="center flex">
+                        <h5>Paragraph {{loop.index}}:</h5>
+                        Paragraph Text:
+                        <input name="ip{{loop.index0}}-text" type="text"
+                            value="{{indexVars['paragraphs'][loop.index0]['text']}}">
+                        <br>
+                        <a href="deleteParagraph" class="btn btn-danger">X</a>
+                    </div>
+                    {% endfor %}
+                    <a href="addParagraph" class="btn btn-success">+</a>
+                </div>
+
+            </div>
+            <br>
+            <hr>
+            <br>
+            <div id="aboutForm">
+                <h3>About Page:</h3>
+                <br>
+                Header Blurb:
+                <input name="a-head_blurb" type="text" value="{{aboutVars['head_blurb']}}">
+                <br>
+                Body Title:
+                <input name="a-body_title" type="text" value="{{aboutVars['body_title']}}">
+                <br>
+                Body Subtitle:
+                <input name="a-body_subtitle" type="text" value="{{aboutVars['body_subtitle']}}">
+                <br>
+                <br>
+                <br>
+                <div id="aboutCards">
+                    <h4>About Cards:</h4>
+                    <br>
+                    {% for card in aboutVars["topCards"] %}
+                    <h5>Card {{loop.index}}:</h5>
+                    Card Title:
+                    <input name="at{{loop.index0}}-heading" type="text"
+                        value="{{aboutVars['topCards'][loop.index0]['heading']}}">
+                    <br>
+                    Card Text:
+                    <input name="at{{loop.index0}}-text" type="text" value="{{aboutVars['topCards'][loop.index0]['text']}}">
+                    <br>
+                    {% endfor %}
+                    {% for card in aboutVars["bottomCards"] %}
+                    <h5>Card {{aboutVars["topCards"]|length + loop.index}}:</h5>
+                    Card Title:
+                    <input name="ab{{loop.index0}}-heading" type="text"
+                        value="{{aboutVars['bottomCards'][loop.index0]['heading']}}">
+                    <br>
+                    Card Text:
+                    <input name="ab{{loop.index0}}-text" type="text"
+                        value="{{aboutVars['bottomCards'][loop.index0]['text']}}">
+                    <br>
+                    {% endfor %}
+                </div>
+            </div>
+            <br>
+            <hr>
+            <br>
+            <div id="privacyForm">
+                <h3>Privacy Policy Page:</h3>
+                <br>
+                Header Blurb:
+                <input name="r-head_blurb" type="text" value="{{privacyVars['head_blurb']}}">
+                <br>
+                Body Text:
+                <input name="r-body_text" type="text" value="{{privacyVars['body_text']}}">
+            </div>
+            <br>
+            <hr>
+            <br>
+
+            {# For loop here for each empty page #}
+            {% for page in newVars.keys() %}
+            <div id="{{page}}Form">
+                
+                {# Use the page name as the id tag #}
+                <h3>{{baseVars['pages'][page]['Name']}}</h3>
+                <br>
+                Page Title:
+                <input name="{{page}}-page_title" type="text" value="{{newVars[page].get('page_title')}}">
+                <br>
+                Page Header:
+                <input name="{{page}}-page_header" type="text" value="{{newVars[page].get('page_header')}}">
+                <br>
+                Page Subheader:
+                <input name="{{page}}-page_subheader" type="text" value="{{newVars[page].get('page_subheader')}}">
+                <br>
+                Text Header:
+                <input name="{{page}}-text_header" type="text" value="{{newVars[page].get('text_header')}}">
+                <br>
+                Text Subheader:
+                <input name="{{page}}-text_subheader" type="text" value="{{newVars[page].get('text_subheader')}}">
+                <br>
+                <br>
+                <br>
+                <div id="{{page}}Paragraphs">
+                    <h4>Paragraphs:</h4>
+                    <br>
+                    {# newVars[page]['paragraphs'] #}
+                    {# newVars['{{page}}']['paragraphs'] #}
+                    {# emptyVars['paragraphs'] #}
+                    {% for paragraph in newVars[page].get('paragraphs', []) %}
+                    <div class="center flex">
+                        <h5>Paragraph {{loop.index}}:</h5>
+                        Paragraph Text:
+                        <input name="{{page}}-p{{loop.index0}}-text" type="text"
+                            value="{{newVars[page].get('paragraphs')[loop.index0]['text']}}">
+                        <br>
+                        <a href="deleteParagraphEmpty1" class="btn btn-danger">X</a>
+                    </div>
+                    {% endfor %}
+                    {# Need new add and delete buttons for each new page #}
+                    <a href="addParagraphEmpty1" class="btn btn-success">+</a>
+                </div>
+                <br>
+
+            </div>
             {% endfor %}
-            <a href="addPage" class="btn btn-success">+</a>
-            <br>
-            Navbar Right Text:
-            <input name="b-navbar_right" type="text" value="{{baseVars['navbar_right']}}">
-            <br>
-            Footer Copyright Text:
-            <input name="b-copyright" type="text" value="{{baseVars['copyright']}}">
-        </div>
-        <br>
-        <hr>
-        <br>
-        <div id="indexForm">
-            <h3>Home Page:</h3>
-            <br>
-            Site Name:
-            <input name="i-site_name" type="text" value="{{indexVars['site_name']}}">
-            <br>
-            Instagram Link:
-            <input name="i-instagram" type="text" value="{{indexVars['instagram']}}">
-            <br>
-            Twitter Link:
-            <input name="i-twitter" type="text" value="{{indexVars['twitter']}}">
-            <br>
-            Email:
-            <input name="i-email" type="text" value="{{indexVars['email']}}">
-            <br>
-            Left Column Header:
-            <input name="i-left_col" type="text" value="{{indexVars['left_col']}}">
-            <br>
-            <br>
-            <br>
-            <div id="paragraphs">
-                <h4>Paragraphs:</h4>
+
+            <!--
+            <div id="emptyForm">
+                {# Jinjify all the e- prefixes so we can have e0-, e1-, etc. #}
+                <h3>Empty Page:</h3>
                 <br>
-                {% for paragraph in indexVars['paragraphs'] %}
-                <div class="center flex">
-                    <h5>Paragraph {{loop.index}}:</h5>
-                    Paragraph Text:
-                    <input name="ip{{loop.index0}}-text" type="text"
-                        value="{{indexVars['paragraphs'][loop.index0]['text']}}">
+                Page Title:
+                <input name="e-page_title" type="text" value="{{emptyVars['page_title']}}">
+                <br>
+                Page Header:
+                <input name="e-page_header" type="text" value="{{emptyVars['page_header']}}">
+                <br>
+                Page Subheader:
+                <input name="e-page_subheader" type="text" value="{{emptyVars['page_subheader']}}">
+                <br>
+                Text Header:
+                <input name="e-text_header" type="text" value="{{emptyVars['text_header']}}">
+                <br>
+                Text Subheader:
+                <input name="e-text_subheader" type="text" value="{{emptyVars['text_subheader']}}">
+                <br>
+                <br>
+                <br>
+                <div id="empty1_paragraphs">
+                    <h4>Paragraphs:</h4>
                     <br>
-                    <a href="deleteParagraph" class="btn btn-danger">X</a>
+                    {% for paragraph in emptyVars['paragraphs'] %}
+                    <div class="center flex">
+                        <h5>Paragraph {{loop.index}}:</h5>
+                        Paragraph Text:
+                        <input name="e-p{{loop.index0}}-text" type="text"
+                            value="{{emptyVars['paragraphs'][loop.index0]['text']}}">
+                        <br>
+                        <a href="deleteParagraphEmpty1" class="btn btn-danger">X</a>
+                    </div>
+                    {% endfor %}
+                    <a href="addParagraphEmpty1" class="btn btn-success">+</a>
                 </div>
-                {% endfor %}
-                <a href="addParagraph" class="btn btn-success">+</a>
             </div>
-
-        </div>
-        <br>
-        <hr>
-        <br>
-        <div id="aboutForm">
-            <h3>About Page:</h3>
+            -->
             <br>
-            Header Blurb:
-            <input name="a-head_blurb" type="text" value="{{aboutVars['head_blurb']}}">
+            <hr>
             <br>
-            Body Title:
-            <input name="a-body_title" type="text" value="{{aboutVars['body_title']}}">
-            <br>
-            Body Subtitle:
-            <input name="a-body_subtitle" type="text" value="{{aboutVars['body_subtitle']}}">
-            <br>
-            <br>
-            <br>
-            <div id="aboutCards">
-                <h4>About Cards:</h4>
-                <br>
-                {% for card in aboutVars["topCards"] %}
-                <h5>Card {{loop.index}}:</h5>
-                Card Title:
-                <input name="at{{loop.index0}}-heading" type="text"
-                    value="{{aboutVars['topCards'][loop.index0]['heading']}}">
-                <br>
-                Card Text:
-                <input name="at{{loop.index0}}-text" type="text" value="{{aboutVars['topCards'][loop.index0]['text']}}">
-                <br>
-                {% endfor %}
-                {% for card in aboutVars["bottomCards"] %}
-                <h5>Card {{aboutVars["topCards"]|length + loop.index}}:</h5>
-                Card Title:
-                <input name="ab{{loop.index0}}-heading" type="text"
-                    value="{{aboutVars['bottomCards'][loop.index0]['heading']}}">
-                <br>
-                Card Text:
-                <input name="ab{{loop.index0}}-text" type="text"
-                    value="{{aboutVars['bottomCards'][loop.index0]['text']}}">
-                <br>
-                {% endfor %}
+            <div id="end">
+                <input type="submit" class="btn btn-success" value="Generate Website!">
             </div>
-        </div>
-        <br>
-        <hr>
-        <br>
-        <div id="privacyForm">
-            <h3>Privacy Policy Page:</h3>
-            <br>
-            Header Blurb:
-            <input name="r-head_blurb" type="text" value="{{privacyVars['head_blurb']}}">
-            <br>
-            Body Text:
-            <input name="r-body_text" type="text" value="{{privacyVars['body_text']}}">
-        </div>
-        <br>
-        <hr>
-        <br>
+        </form>
+    </div>
 
-        {# For loop here for each empty page #}
-        {% for page in newVars.keys() %}
-        <div id="{{page}}Form">
-            
-            {# Use the page name as the id tag #}
-            <h3>{{page}}</h3>
-            <br>
-            Page Title:
-            <input name="{{page}}-page_title" type="text" value="{{newVars[page].get('page_title')}}">
-            <br>
-            Page Header:
-            <input name="{{page}}-page_header" type="text" value="{{newVars[page].get('page_header')}}">
-            <br>
-            Page Subheader:
-            <input name="{{page}}-page_subheader" type="text" value="{{newVars[page].get('page_subheader')}}">
-            <br>
-            Text Header:
-            <input name="{{page}}-text_header" type="text" value="{{newVars[page].get('text_header')}}">
-            <br>
-            Text Subheader:
-            <input name="{{page}}-text_subheader" type="text" value="{{newVars[page].get('text_subheader')}}">
-            <br>
-            <br>
-            <br>
-            <div id="{{page}}Paragraphs">
-                <h4>Paragraphs:</h4>
-                <br>
-                {# newVars[page]['paragraphs'] #}
-                {# newVars['{{page}}']['paragraphs'] #}
-                {# emptyVars['paragraphs'] #}
-                {% for paragraph in newVars[page].get('paragraphs', []) %}
-                <div class="center flex">
-                    <h5>Paragraph {{loop.index}}:</h5>
-                    Paragraph Text:
-                    <input name="{{page}}-p{{loop.index0}}-text" type="text"
-                        value="{{newVars[page].get('paragraphs')[loop.index0]['text']}}">
-                    <br>
-                    <a href="deleteParagraphEmpty1" class="btn btn-danger">X</a>
-                </div>
-                {% endfor %}
-                <a href="addParagraphEmpty1" class="btn btn-success">+</a>
-            </div>
-            <br>
+    {% endblock %}
 
-        </div>
-        {% endfor %}
+    {% block foot%}
 
-        <!--
-        <div id="emptyForm">
-            {# Jinjify all the e- prefixes so we can have e0-, e1-, etc. #}
-            <h3>Empty Page:</h3>
-            <br>
-            Page Title:
-            <input name="e-page_title" type="text" value="{{emptyVars['page_title']}}">
-            <br>
-            Page Header:
-            <input name="e-page_header" type="text" value="{{emptyVars['page_header']}}">
-            <br>
-            Page Subheader:
-            <input name="e-page_subheader" type="text" value="{{emptyVars['page_subheader']}}">
-            <br>
-            Text Header:
-            <input name="e-text_header" type="text" value="{{emptyVars['text_header']}}">
-            <br>
-            Text Subheader:
-            <input name="e-text_subheader" type="text" value="{{emptyVars['text_subheader']}}">
-            <br>
-            <br>
-            <br>
-            <div id="empty1_paragraphs">
-                <h4>Paragraphs:</h4>
-                <br>
-                {% for paragraph in emptyVars['paragraphs'] %}
-                <div class="center flex">
-                    <h5>Paragraph {{loop.index}}:</h5>
-                    Paragraph Text:
-                    <input name="e-p{{loop.index0}}-text" type="text"
-                        value="{{emptyVars['paragraphs'][loop.index0]['text']}}">
-                    <br>
-                    <a href="deleteParagraphEmpty1" class="btn btn-danger">X</a>
-                </div>
-                {% endfor %}
-                <a href="addParagraphEmpty1" class="btn btn-success">+</a>
-            </div>
-        </div>
-        -->
-        <br>
-        <hr>
-        <br>
-        <div id="end">
-            <input type="submit" class="btn btn-success" value="Generate Website!">
-        </div>
-    </form>
-</div>
+    {% endblock %}
+</body>
 
-{% endblock %}
-
-{% block foot%}
-
-{% endblock %}
+</html>

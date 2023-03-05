@@ -8,8 +8,9 @@
 
     <nav id="header-nav" class="flexSpread m-3">
         <div id="links" class="flex">
-            {% for page in pages %}
-            <a href="{{page['Link']}}" class="{{navBtnClass}}">{{page['Name']}}</a>
+            {% for page in pages.keys() %}
+            {# This naming convention doesn't work if form.html.j2 extends base.html.j2 #}
+            <a href="{{pages[page]['Link']}}" class="{{navBtnClass}}">{{pages[page]['Name']}}</a>
             {% endfor %}
             <a href="/" class="btn btn-danger">Back To Form</a>
         </div>
@@ -47,8 +48,8 @@
         
             <!-- Home/About -->
             <nav id="footer-nav">
-                {% for page in pages %}
-                <a href="{{page['Link']}}">{{page['Name']}}</a>
+                {% for page in pages.keys() %}
+                <a href="{{pages[page]['Link']}}">{{pages[page]['Name']}}</a>
                 {% endfor %}
             </nav>
             <!-- Copyright -->
