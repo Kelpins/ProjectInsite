@@ -64,6 +64,7 @@ for page in data["newVars"].keys():
     for i in data["newVars"][page]:
         key = i
         value = data["newVars"][page][i]
+        # The paragraphs for new pages are not editable because they are passed by reference from emptyVars
         if str(value).split("*****")[0] == "var":
             newVars[page][key] = data[str(value).split("*****")[1]]
         elif str(value).split("*****")[0] == "func":
@@ -160,12 +161,15 @@ def generateWebsite():
                 return "PRIVACY BORKED!!! -- 003"
         # Change this stuff
         elif prefix in newVars.keys():
-            # print("New page prefix: " + prefix)
-            if id[len(id)-1] == "-":
+            # if id[len(id)-1] == "-":
+            if len(splitKey) == 2:
                 newVars[prefix][fieldName] = value
-            elif id[len(id)-1] == "p":
-                num = id.split("-")[0].split("p")[1]
+            # No splitting on letters my dude
+            # elif id[len(id)-1] == "p":
+            elif len(splitKey) == 3:
+                num = splitKey[1]
                 newVars[prefix]["paragraphs"][int(num)][fieldName] = value
+                # print("New paragraph: " + newVars[prefix]["paragraphs"][int(num)][fieldName])
             else:
                 return "New page BORKED!!! -- 004"
         else:
@@ -192,7 +196,8 @@ def addPage():
     newPageCount = len(newVars.keys()) + 1
     baseVars["pages"]["page"+str(newPageCount)] = {"Name" : "page"+str(newPageCount), "Link" : "page"+str(newPageCount)}
     # The IDs in baseVars["pages"] and the keys of newVars should always match exactly (except for home/about)
-    newVars["page"+str(newPageCount)] = {}
+    # Each new page has the values from emptyVars as default
+    newVars["page"+str(newPageCount)] = {k:v for k, v in emptyVars.items()}
     return redirect('/')
     
 @app.route('/privacy-policy')
