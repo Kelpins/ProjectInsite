@@ -6,7 +6,7 @@ import sys
 import json
 
 app = Flask(__name__)
-
+app.config['SECRET_KEY'] = "bjork"
 
 def getsizes(url):
     
@@ -28,7 +28,7 @@ privacyVars = {}
 emptyVars = {}
 newVars = {}
 
-filepath = "static/template4.json"
+filepath = "static/burnie4.json"
 
 file = open(filepath)
 data = json.load(file)
