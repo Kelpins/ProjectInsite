@@ -4,6 +4,7 @@ import requests
 from PIL import Image as fja
 import sys
 import json
+import forms
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "bjork"
@@ -97,17 +98,26 @@ for page in newVars.keys():
     newVars[page].update(baseVars)
 
 #Routers
+
+# New route for form page, uses WTForms
 @app.route('/')
-def form():
-    formVars = {
-        "baseVars" : baseVars,
-        "indexVars" : indexVars,
-        "aboutVars" : aboutVars,
-        "privacyVars" : privacyVars,
-        "emptyVars" : emptyVars,
-        "newVars" : newVars
-    }
-    return render_template('form.html.j2', **formVars)
+def wtform():
+    filepathWTF = "static/burnie5.json"
+    fileWTF = open(filepathWTF)
+    dataWTF = json.load(fileWTF)
+    formWTF = forms.BigForm(data=dataWTF)
+    return render_template('wtform.html.j2', form=formWTF)
+
+# def form():
+#     formVars = {
+#         "baseVars" : baseVars,
+#         "indexVars" : indexVars,
+#         "aboutVars" : aboutVars,
+#         "privacyVars" : privacyVars,
+#         "emptyVars" : emptyVars,
+#         "newVars" : newVars
+#     }
+#     return render_template('form.html.j2', **formVars)
 
 @app.route('/generate', methods=["POST"])
 def generateWebsite():

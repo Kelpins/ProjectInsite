@@ -9,7 +9,7 @@ class IndexForm(FlaskForm):
     email = StringField('Email')
     left_col = StringField('Left Column Header')
     # Paragraphs: tie min number to the data from content JSONs
-    paragraphs = FieldList(StringField(), min=9)
+    paragraphs = FieldList(StringField("Text"), min_entries=9)
 
 class CardForm(Form):
     heading = StringField('Heading')
@@ -21,7 +21,7 @@ class AboutForm(FlaskForm):
     body_title = StringField('Body Title')
     body_subtitle = StringField('Body Subtitle')
     # About page has 6 cards by default
-    cards = FieldList(FormField(CardForm), min=6)
+    cards = FieldList(FormField(CardForm), min_entries=6)
 
 class PrivacyForm(FlaskForm):
     head_blurb = StringField('Head Blurb')
@@ -33,9 +33,11 @@ class NewPageForm(FlaskForm):
     page_subheader = StringField('Page Subheader')
     text_header = StringField("Text Header")
     text_subheader = StringField("Text Subheader")
-    paragraphs = FieldList(StringField(), min=9)
+    paragraphs = FieldList(StringField('Text'), min_entries=9)
 
 class BigForm(FlaskForm):
+    # This will contain everything our original form page did
     index = FormField(IndexForm)
     about = FormField(AboutForm)
     privacy = FormField(PrivacyForm)
+    submit = SubmitField('Generate Website')
