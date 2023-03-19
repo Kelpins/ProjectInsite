@@ -106,7 +106,9 @@ def wtform():
     fileWTF = open(filepathWTF)
     dataWTF = json.load(fileWTF)
     formWTF = forms.BigForm(data=dataWTF)
-    return render_template('wtform.html.j2', form=formWTF)
+    if formWTF.validate_on_submit():
+        return render_template('wtform.html.j2', form=formWTF)
+    return "JASON BORKED IT"
 
 # def form():
 #     formVars = {

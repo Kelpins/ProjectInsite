@@ -1,63 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 
-{# This page longer extends base.html.j2, as the base template requires elements of baseVars, e.g. 'pages', and in the form template those elements are used as baseVars['pages'] #}
+{# This page longer extends base.html.j2, as the base template requires elements of baseVars, e.g. 'pages', and in the
+form template those elements are used as baseVars['pages'] #}
 
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link href="static/style.css" rel="stylesheet">
-{% block title %}
+    {% block title %}
 
-<title>Form</title>
+    <title>Form</title>
 
-{% endblock title %}
+    {% endblock title %}
 
 </head>
 
 <body class="m-0">
 
-{% block head %}
-{% endblock %}
+    {% block head %}
+    {% endblock %}
 
-{% block body %}
+    {% block body %}
 
-<form action="" method="post" novalidate>
-    {{ form.hidden_tag() }}
-    <div id="indexForm">
-        <p>
-            {{form.index.site_name.label}}
-            {{form.index.site_name()}}
-        </p>
-        <p>
-            {{form.index.instagram.label}}
-            {{form.index.instagram()}}
-        </p>
-        <p>
-            {{form.index.twitter.label}}
-            {{form.index.twitter()}}
-        </p>
-        <p>
-            {{form.index.email.label}}
-            {{form.index.email()}}
-        </p>    
-        <p>
-            {{form.index.left_col.label}}
-            {{form.index.left_col()}}
-        </p>
-            
-    </div>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <h2>Home Page: </h2>
+        <div id="indexForm">
+            <p>
+                {{form.index.site_name.label}}
+                {{form.index.site_name()}}
+            </p>
+            <p>
+                {{form.index.instagram.label}}
+                {{form.index.instagram()}}
+            </p>
+            <p>
+                {{form.index.twitter.label}}
+                {{form.index.twitter()}}
+            </p>
+            <p>
+                {{form.index.email.label}}
+                {{form.index.email()}}
+            </p>
+            <p>
+                {{form.index.left_col.label}}
+                {{form.index.left_col()}}
+            </p>
 
-    <div id="submit">
-        <p> {{form.submit()}} </p>
-    </div>
-</form>
+            {% for field in form.index.paragraphs %}
+            <p>
+                {{field.label}}
+                {{field()}}
+            </p>
+            {% endfor %}
 
-{% endblock %}
+        </div>
 
-{% block foot%}
+        <h2>About Page: </h2>
 
-{% endblock %}
+        <div id="aboutForm">
+
+            <p>
+                {{form.about.head_blurb.label}}
+                {{form.about.head_blurb()}}
+            </p>
+            <p>
+                {{form.about.body_title.label}}
+                {{form.about.body_title()}}
+            </p>
+            <p>
+                {{form.about.body_subtitle.label}}
+                {{form.about.body_subtitle()}}
+            </p>
+            {% for card in form.about.cards %}
+            <p>
+                {{card.label}}
+                {{card()}}
+            </p>
+            {% endfor %}
+
+        </div>
+
+        <h2>Privacy Policy Page: </h2>
+
+        <div id="privacyForm">
+
+            <p>
+                {{form.privacy.head_blurb.label}}
+                {{form.about.head_blurb()}}
+            </p>
+            <p>
+                {{form.privacy.body_text.label}}
+                {{form.privacy.body_text()}}
+            </p>
+
+        </div>
+
+        <h2>New Page: </h2>
+
+        <div id="newForm">
+
+            <p>
+                {{form.new.page_title.label}}
+                {{form.new.page_title()}}
+            </p>
+            <p>
+                {{form.new.page_header.label}}
+                {{form.new.page_header()}}
+            </p>
+            <p>
+                {{form.new.page_subheader.label}}
+                {{form.new.page_subheader()}}
+            </p>
+            <p>
+                {{form.new.text_header.label}}
+                {{form.new.text_header()}}
+            </p>
+            <p>
+                {{form.new.text_subheader.label}}
+                {{form.new.text_subheader()}}
+            </p>
+
+            {% for field in form.new.paragraphs %}
+            <p>
+                {{field.label}}
+                {{field()}}
+            </p>
+            {% endfor %}
+
+        </div>
+
+        <div id="submit">
+            <p> {{form.submit()}} </p>
+        </div>
+    </form>
+
+    {% endblock %}
+
+    {% block foot%}
+
+    {% endblock %}
 </body>
 
 </html>

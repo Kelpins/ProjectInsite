@@ -40,4 +40,5 @@ class BigForm(FlaskForm):
     index = FormField(IndexForm)
     about = FormField(AboutForm)
     privacy = FormField(PrivacyForm)
+    new = FormField(NewPageForm)
     submit = SubmitField('Generate Website')
