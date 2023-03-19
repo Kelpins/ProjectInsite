@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 import io
 import requests
 from PIL import Image as fja
@@ -100,15 +100,21 @@ for page in newVars.keys():
 #Routers
 
 # New route for form page, uses WTForms
-@app.route('/')
+@app.route('/', methods=["GET", "POST"])
 def wtform():
     filepathWTF = "static/burnie5.json"
     fileWTF = open(filepathWTF)
     dataWTF = json.load(fileWTF)
     formWTF = forms.BigForm(data=dataWTF)
     if formWTF.validate_on_submit():
-        return render_template('wtform.html.j2', form=formWTF)
-    return "JASON BORKED IT"
+        for field in formWTF.index:
+            indexVars[field] = field.data
+        for field in formWTF.about:
+            aboutVars[field] = field.data
+        for field in formWTF.privacy:
+            privacyVars[field] = field.data
+        return redirect('/index')    
+    return render_template('wtform.html.j2', form=formWTF)
 
 # def form():
 #     formVars = {
