@@ -108,12 +108,15 @@ def wtform():
     formWTF = forms.BigForm(data=dataWTF)
     if formWTF.validate_on_submit():
         for field in formWTF.index:
+            print(field)
             indexVars[field] = field.data
         for field in formWTF.about:
             aboutVars[field] = field.data
         for field in formWTF.privacy:
             privacyVars[field] = field.data
-        return redirect('/index')    
+        return redirect('/index')
+    else:
+        print(formWTF.errors)
     return render_template('wtform.html.j2', form=formWTF)
 
 # def form():
