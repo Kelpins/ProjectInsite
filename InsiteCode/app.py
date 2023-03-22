@@ -5,9 +5,10 @@ from PIL import Image as fja
 import sys
 import json
 import forms
+from config import Config
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = "bjork"
+app.config.from_object(Config)
 
 def getsizes(url):
     
@@ -108,12 +109,14 @@ def wtform():
     formWTF = forms.BigForm(data=dataWTF)
     if formWTF.validate_on_submit():
         for field in formWTF.index:
-            print(field)
-            indexVars[field] = field.data
+            print(field.short_name)
+            indexVars[field.short_name] = field.data
         for field in formWTF.about:
-            aboutVars[field] = field.data
+            print(field.short_name)
+            aboutVars[field.short_name] = field.data
         for field in formWTF.privacy:
-            privacyVars[field] = field.data
+            print(field.short_name)
+            privacyVars[field.short_name] = field.data
         return redirect('/index')
     else:
         print(formWTF.errors)
