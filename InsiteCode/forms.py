@@ -9,7 +9,7 @@ class IndexForm(FlaskForm):
     email = StringField('Email')
     left_col = StringField('Left Column Header')
     # Paragraphs: tie min number to the data from content JSONs
-    paragraphs = FieldList(StringField("Text"), min_entries=9)
+    paragraphs = FieldList(StringField('Text'), min_entries=9)
 
 class CardForm(Form):
     heading = StringField('Heading')
@@ -31,8 +31,8 @@ class NewPageForm(FlaskForm):
     page_title = StringField('Page Title')
     page_header = StringField('Page Header')
     page_subheader = StringField('Page Subheader')
-    text_header = StringField("Text Header")
-    text_subheader = StringField("Text Subheader")
+    text_header = StringField('Text Header')
+    text_subheader = StringField('Text Subheader')
     paragraphs = FieldList(StringField('Text'), min_entries=9)
 
 class BigForm(FlaskForm):

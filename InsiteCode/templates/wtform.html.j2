@@ -49,12 +49,17 @@ form template those elements are used as baseVars['pages'] #}
                 {{form.index.left_col()}}
             </p>
 
-            {% for field in form.index.paragraphs %}
+            <p>
+                {{form.index.paragraphs.label}}
+                {{form.index.paragraphs()}}
+            </p>
+
+            {# {% for field in form.index.paragraphs %}
             <p>
                 {{field.label}}
                 {{field()}}
             </p>
-            {% endfor %}
+            {% endfor %} #}
 
         </div>
 
@@ -77,12 +82,18 @@ form template those elements are used as baseVars['pages'] #}
                 {{form.about.body_subtitle.label}}
                 {{form.about.body_subtitle()}}
             </p>
-            {% for card in form.about.cards %}
+
+            <p>
+                {{form.about.cards.label}}
+                {{form.about.cards()}}
+            </p>
+
+            {# {% for card in form.about.cards %}
             <p>
                 {{card.label}}
                 {{card()}}
             </p>
-            {% endfor %}
+            {% endfor %} #}
 
         </div>
 
@@ -128,12 +139,17 @@ form template those elements are used as baseVars['pages'] #}
                 {{form.new.text_subheader()}}
             </p>
 
-            {% for field in form.new.paragraphs %}
+            <p>
+                {{form.new.paragraphs.label}}
+                {{form.new.paragraphs()}}
+            </p>
+
+            {# {% for field in form.new.paragraphs %}
             <p>
                 {{field.label}}
                 {{field()}}
             </p>
-            {% endfor %}
+            {% endfor %} #}
 
         </div>
 

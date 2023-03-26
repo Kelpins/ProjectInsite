@@ -26,11 +26,10 @@ baseVars = {}
 indexVars = {}
 aboutVars = {}
 privacyVars = {}
-# Make emptyVars a list, with each entry being a specific page's vars
 emptyVars = {}
 newVars = {}
 
-filepath = "static/burnie4.json"
+filepath = "static/burnie5.json"
 
 file = open(filepath)
 data = json.load(file)
@@ -42,9 +41,9 @@ for i in data["baseVars"]:
         baseVars[key] = data[str(value).split("*****")[1]]
     else:
         baseVars[key] = value
-for i in data["indexVars"]:
+for i in data["index"]:
     key = i
-    value = data["indexVars"][i]
+    value = data["index"][i]
     if str(value).split("*****")[0] == "var":
         indexVars[key] = data[str(value).split("*****")[1]]
     elif str(value).split("*****")[0] == "func":
@@ -76,16 +75,16 @@ for page in data["newVars"].keys():
             # print("Key: " + key)
             # print("Value: " + value)
             newVars[page][key] = value
-for i in data["aboutVars"]:
+for i in data["about"]:
     key = i
-    value = data["aboutVars"][i]
+    value = data["about"][i]
     if str(value).split("*****")[0] == "var":
         aboutVars[key] = data[str(value).split("*****")[1]]
     else:
         aboutVars[key] = value
-for i in data["privacyVars"]:
+for i in data["privacy"]:
     key = i
-    value = data["privacyVars"][i]
+    value = data["privacy"][i]
     if str(value).split("*****")[0] == "var":
         privacyVars[key] = data[str(value).split("*****")[1]]
     else:
@@ -110,13 +109,15 @@ def wtform():
     if formWTF.validate_on_submit():
         for field in formWTF.index:
             print(field.short_name)
-            if field.short_name == "paragraphs":
-                for i in range(len(field.data)):
-                    # print(field.data[i])
-                    indexVars["paragraphs"][i] = field.data[i]
-                # print(indexVars["paragraphs"])
-            else:
-                indexVars[field.short_name] = field.data
+            indexVars[field.short_name] = field.data
+            # if field.short_name == "paragraphs":
+            #     print(field.data)
+            #     for i in range(len(field.data)):
+            #         # print(field.data[i])
+            #         indexVars["paragraphs"][i] = field.data[i]
+            #     # print(indexVars["paragraphs"])
+            # else:
+            #     indexVars[field.short_name] = field.data
         for field in formWTF.about:
             print(field.short_name)
             aboutVars[field.short_name] = field.data
@@ -128,91 +129,6 @@ def wtform():
         print(formWTF.errors)
     return render_template('wtform.html.j2', form=formWTF)
 
-# def form():
-#     formVars = {
-#         "baseVars" : baseVars,
-#         "indexVars" : indexVars,
-#         "aboutVars" : aboutVars,
-#         "privacyVars" : privacyVars,
-#         "emptyVars" : emptyVars,
-#         "newVars" : newVars
-#     }
-#     return render_template('form.html.j2', **formVars)
-
-@app.route('/generate', methods=["POST"])
-def generateWebsite():
-    website_data = request.form
-    for item in website_data:
-        key = item
-        value = website_data[item]
-        splitKey = key.split("-")
-        prefix = splitKey[0]
-        id = prefix + "-"
-        # fieldName should be the last entry in splitKey, usually index 1 but sometimes index 2
-        fieldName = splitKey[len(splitKey)-1]
-
-        if id[0] == "b":
-            if (len(splitKey) == 3) and (splitKey[1] in baseVars["pages"].keys()):
-                # num = id.split("-")[0].split("p")[1]
-                pageID = splitKey[1]
-                # Previously baseVars["pages"][int(num)][str(fieldName)] = value
-                # print("Key: " + key)
-                # print("Value: " + value)
-                # print("PageID: " + pageID)
-                # print("FieldName: " + fieldName)
-                baseVars["pages"][pageID][fieldName] = value
-            elif id[1] == "-":
-                baseVars[fieldName] = value
-            else:
-                return "BASE BORKED!!!"
-        elif id[0] == "i":
-            if id[1] == "-":
-                indexVars[fieldName] = value
-            elif id[1] == "p":
-                num = id.split("-")[0].split("p")[1]
-                indexVars["paragraphs"][int(num)][fieldName] = value
-            else:
-                return "INDEX BORKED!!!"
-        elif id[0] == "a":
-            if id[1] == "-":
-                aboutVars[fieldName] = value
-            elif id[1] == "t":
-                num = id.split("-")[0].split("t")[1]
-                aboutVars["topCards"][int(num)][fieldName] = value
-            elif id[1] == "b":
-                num = id.split("-")[0].split("b")[1]
-                aboutVars["bottomCards"][int(num)][fieldName] = value
-            else:
-                return "ABOUT BORKED!!!"
-        elif id[0] == "r":
-            if id[1] == "-":
-                privacyVars[key[1:]] = value
-            else:
-                return "PRIVACY BORKED!!! -- 003"
-        # Change this stuff
-        elif prefix in newVars.keys():
-            # if id[len(id)-1] == "-":
-            if len(splitKey) == 2:
-                newVars[prefix][fieldName] = value
-            # No splitting on letters my dude
-            # elif id[len(id)-1] == "p":
-            elif len(splitKey) == 3:
-                num = splitKey[1]
-                newVars[prefix]["paragraphs"][int(num)][fieldName] = value
-                # print("New paragraph: " + newVars[prefix]["paragraphs"][int(num)][fieldName])
-            else:
-                return "New page BORKED!!! -- 004"
-        else:
-            print("Empty prefix " + prefix)
-            if id[1] == "-":
-                emptyVars[fieldName] = value
-            elif id[1] == "p":
-                num = id.split("-")[0].split("p")[1]
-                emptyVars["paragraphs"][int(num)][fieldName] = value
-            else:
-                return "EMPTY BORKED!!! -- 004"
-    return redirect('/index')
-
 # Generalize this to also work for the new pages
 @app.route('/addParagraph')
 def addParagraph():
@@ -221,7 +137,6 @@ def addParagraph():
 
 @app.route('/addPage')
 def addPage():
-    # Reformat baseVars["pages"] as a simple dictionary: keys are names, values are links
     # Keep a counter and generate page names as "page1", "page2", etc.
     newPageCount = len(newVars.keys()) + 1
     baseVars["pages"]["page"+str(newPageCount)] = {"Name" : "page"+str(newPageCount), "Link" : "page"+str(newPageCount)}
@@ -236,12 +151,10 @@ def privacy():
 
 # @app.route('/index')
 # def indexRoute():
-#     print(("Jason is scam"))
 #     return render_template('index.html.j2', **indexVars)
 
 @app.route('/<route>')
 def router(route):
-    # Reformat baseVars["pages"] as a simple dictionary: keys are names, values are links
     pages = baseVars["pages"].keys()
     # routes is a list of all possible pages except privacy-policy
     routes = {}
@@ -258,7 +171,6 @@ def router(route):
 
     if route in routes.keys():
         pageID = routes[route]
-        # Can this break if you change the page route in the submission form?
         if pageID == "index":
             return render_template('index.html.j2', **indexVars)
         elif pageID == "about":
