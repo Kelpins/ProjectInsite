@@ -57,8 +57,8 @@
         <div id="mid-text" class="col-6">
             <!-- Text -->
             {% for paragraph in paragraphs %}
+            {# Old paragraph styling depends on each entry in paragraphs being a dictionary with "text" and "style" entries
                 <p style="
-                
                 {% for value in paragraph['style'] %}
                     {{value}}
                     {% if loop.index%2 == 1 %}
@@ -68,7 +68,8 @@
                     {% endif %}
                 {% endfor %}
                 
-                ">{{paragraph["text"]}}</p>
+                ">{{paragraph["text"]}}</p> #}
+                <p style="">{{paragraph}}</p>
             {% endfor %}
         </div>
         <!-- Column 3 -->

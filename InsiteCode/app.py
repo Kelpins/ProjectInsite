@@ -112,9 +112,9 @@ def wtform():
             print(field.short_name)
             if field.short_name == "paragraphs":
                 for i in range(len(field.data)):
-                    print(field.data[i])
+                    # print(field.data[i])
                     indexVars["paragraphs"][i] = field.data[i]
-                print(indexVars["paragraphs"])
+                # print(indexVars["paragraphs"])
             else:
                 indexVars[field.short_name] = field.data
         for field in formWTF.about:
@@ -234,10 +234,10 @@ def addPage():
 def privacy():
     return render_template('privacy-policy.html.j2', **privacyVars)
 
-@app.route('/index')
-def indexRoute():
-    print(("Jason is scam"))
-    return render_template('index.html.j2', **indexVars)
+# @app.route('/index')
+# def indexRoute():
+#     print(("Jason is scam"))
+#     return render_template('index.html.j2', **indexVars)
 
 @app.route('/<route>')
 def router(route):
