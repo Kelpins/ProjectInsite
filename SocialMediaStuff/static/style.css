@@ -1,0 +1,101 @@
+body {
+
+    margin: 2%;
+
+}
+
+.flex {
+
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+}
+
+.flexSpread {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.burnieColors{
+    background-color:#00144a;
+    color:#ffffff;
+}
+
+.slant-header{
+    background-color:#00144a;
+    color:#ffffff;
+    background-size:cover;
+    background-repeat:no-repeat;
+    clip-path:polygon(0 0, 100% 0, 100% calc(100% - 100px), 0 100%);
+    -webkit-clip-path:polygon(0 0, 100% 0, 100% calc(100% - 100px), 0 100%);
+}
+
+.profile-header{
+
+    display: flex;
+    gap: 20px;
+
+}
+
+.imgthing {
+
+    clip-path:circle();
+
+}
+
+.slant-footer{
+    height: 100px;
+    background-color:#00144a;
+    color:#ffffff;        
+    clip-path:polygon(100% 0, 100% 100%,  0 100%);
+    -webkit-clip-path:polygon(100% 0, 100% 100%, 0 100%);
+}
+
+.flat-footer{
+    height: 150px;
+    background-color:#00144a;
+    color:#ffffff;
+}
+
+.right {
+
+    text-align: right;
+
+}
+
+.left {
+
+    text-align: left;
+
+}
+
+.center {
+
+    text-align: center;
+    margin: auto
+
+}
+
+#columns {
+
+    display: flex;
+
+}
+
+#constrained {
+
+    margin: 5%
+
+}
+
+#form1 {
+
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+}

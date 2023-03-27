@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link href="static/style.css" rel="stylesheet">
+
+    <nav id="header-nav" class="flexSpread m-3">
+        <div id="links" class="flex">
+            {% for page in pages %}
+            {# This naming convention doesn't work if form.html.j2 extends base.html.j2 #}
+            <a href="{{page['Link']}}" class="{{navBtnClass}}">{{page['Name']}}</a>
+            {% endfor %}
+            <a href="/" class="btn btn-danger">Back To Form</a>
+        </div>
+        {# so much more than a dude playing the cowbell #}
+        <div id="flex">
+            <p id="cowbell" class="right"> {{navbar_right}} </p>
+        </div>
+    </nav>
+    {% block title %}
+    {% endblock %}
+</head>
+
+<!-- -->
+
+<body class="m-0">
+    {% block head %}
+
+    {% endblock head %}
+    {% block body %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+    {% endblock %}
+    {% block foot %}
+    <!-- diagonal swoosh -->
+    <div id="footer-slant" class="slant-footer">
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center flat-footer">
+
+        <div id="footer-contents" class="container p-3">
+
+            <!-- Home/About -->
+            <nav id="footer-nav">
+                {% for page in pages %}
+                <a href="{{page['Link']}}">{{page['Name']}}</a>
+                {% endfor %}
+            </nav>
+            <!-- Copyright -->
+            {# ©Copyright 2022. All rights reserved. #}
+            <p id="copyright" class="p-3">{{copyright}}</p>
+            <!-- Privacy Policy -->
+            <a id="privacy-policy" href="/privacy-policy">Privacy Policy</a>
+        </div>
+    </footer>
+    {% endblock %}
+</body>
+
+</html>

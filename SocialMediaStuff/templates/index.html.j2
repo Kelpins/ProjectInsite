@@ -1,0 +1,84 @@
+{% extends "base.html.j2" %}
+
+
+{% block title %}
+
+<title>Home</title>
+
+{% endblock title %}
+
+{% block head %}
+
+
+<div id = "header"
+  class="slant-header container-fluid d-flex justify-content-center"
+  style="
+    height: {{head_height}} ;
+    background-image: linear-gradient( {{head_color}}, {{head_color}}), url(' {{head_img}} ');
+    background-position: {{head_img_pos}};
+    background-attachment:fixed;
+
+    "
+>
+    <div id="header-contents" 
+        class="d-flex flex-column justify-content-center align-items-end"
+        style="width: 75%"
+    >
+
+        <div id="site-name" class="d-flex flex-row">
+            <h1 class="mt-4 mb-4"> {{site_name}} </h1>
+        </div>
+        
+        <div id="SM-links" class="d-flex flex-row">
+            <a class="m-2 {{smBtnClass}}" href="{{instagram}}">instagram</a>
+            <a class="m-2 {{smBtnClass}}" href="{{twitter}}">twitter</a>
+            <a class="m-2 {{smBtnClass}}" href="{{email}}">email</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block body %}
+
+
+<!-- Main Body -->
+<!-- 3 Columns -->
+<div id="main-body" class="container mt-5 mb-5">
+    <div class="row">
+
+
+        <!-- Column 1 -->
+        <div id="new-map" class="col-3">
+            <!-- Heading -->
+            <h2> {{left_col}} </h2>
+        </div>
+        <!-- Column 2 -->
+        <div id="mid-text" class="col-6">
+            <!-- Text -->
+            {% for paragraph in paragraphs %}
+            {# Old paragraph styling depends on each entry in paragraphs being a dictionary with "text" and "style" entries
+                <p style="
+                {% for value in paragraph['style'] %}
+                    {{value}}
+                    {% if loop.index%2 == 1 %}
+                        :
+                    {% else %}
+                        ;
+                    {% endif %}
+                {% endfor %}
+                
+                ">{{paragraph["text"]}}</p> #}
+                <p style="">{{paragraph}}</p>
+            {% endfor %}
+        </div>
+        <!-- Column 3 -->
+        <div id="burnie-img" class="col-3">
+            <!-- Image -->
+            <img src="{{right_col_img}}" alt="{{img_alt}}" width="{{img_width}}" height="{{img_height}}">
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

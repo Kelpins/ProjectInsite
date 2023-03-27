@@ -9,16 +9,7 @@ win = Tk()
 app = Flask(__name__)
 
 def getsizes(url):
-    image_content = requests.get(url).content
-    image_stream = io.BytesIO(image_content)
-    img = fja.open(image_stream)
-    size = img.size
-    screenWidth = win.winfo_screenwidth()
-    print("Screen Width: " + str(screenWidth))
-    width = size[0]
-    height = ((screenWidth/4) * size[1]) / width
-    results = [screenWidth/4, height]
-    return results
+    return 500
 
 baseVars = {
     "navBtnClass" : "btn btn-primary",

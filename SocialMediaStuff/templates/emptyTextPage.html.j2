@@ -1,0 +1,78 @@
+{% extends "base.html.j2" %}
+
+
+{% block title %}
+
+<title>{{page_title}}</title>
+
+{% endblock title %}
+
+{% block head %}
+
+<div id = "header"
+  class="slant-header container-fluid d-flex justify-content-center"
+  style="
+    height: {{head_height}} ;
+    background-image: linear-gradient( {{head_color}}, {{head_color}}), url(' {{head_img}} ');
+    background-position: {{head_img_pos}};
+    background-attachment:fixed;
+
+    "
+>
+    <div id="header-contents" 
+        class="d-flex flex-column justify-content-center align-items-end"
+        style="width: 75%"
+    >
+
+        <h1 class="mt-4 mb-4"> {{page_header}} </h1>
+        <p class="mb-4"> {{page_subheader}} </p>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block body %}
+
+
+<!-- Main Body -->
+<!-- 3 Columns -->
+<div id="main-body" class="container mt-5 mb-5">
+    <div class="row">
+
+
+        <!-- Column 1 -->
+        <div id="left-col-text" class="col-3">
+            <!-- Heading -->
+            <h2> {{text_header}} </h2>
+            <br>
+            <h4> {{text_subheader}} </h4>
+        </div>
+        <!-- Column 2 -->
+        <div id="mid-text" class="col-6">
+            <!-- Text -->
+            {% for paragraph in paragraphs %}
+                <p style="
+                
+                {% for value in paragraph['style'] %}
+                    {{value}}
+                    {% if loop.index%2 == 1 %}
+                        :
+                    {% else %}
+                        ;
+                    {% endif %}
+                {% endfor %}
+                
+                ">{{paragraph["text"]}}</p>
+            {% endfor %}
+        </div>
+        <!-- Column 3 -->
+        <div id="right-col-img" class="col-3">
+            <!-- Image -->
+            <img src="{{right_col_img}}" alt="{{img_alt}}" width="{{img_width}}" height="{{img_height}}">
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
