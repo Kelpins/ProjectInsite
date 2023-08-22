@@ -6,9 +6,16 @@ import sys
 import json
 import forms
 from config import Config
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 app.config.from_object(Config)
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+
+# Models requires app and db, import after those are defined to avoid circular import
+from models import User, Page, PageComponent
 
 # Currently unnecessary but may be useful for future image resizing
 def getsizes(url):
@@ -21,6 +28,10 @@ def getsizes(url):
     height = ((screenWidth/4) * size[1]) / width
     results = [screenWidth/4, height]
     return results
+
+@app.shell_context_processor
+def make_shell_context():
+    return {'db': db, 'User': User, 'Page': Page, 'PageComponent': PageComponent}
 
 filepath = "static/burnie6.json"
 
