@@ -4,7 +4,6 @@ import requests
 from PIL import Image as fja
 import sys
 import json
-import forms
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -19,6 +18,7 @@ login = LoginManager(app)
 
 # Models requires app and db, import after those are defined to avoid circular import
 from models import User, Page, PageComponent
+from forms import BigForm, LoginForm, RegistrationForm
 
 # Currently unnecessary but may be useful for future image resizing
 def getsizes(url):
@@ -52,7 +52,7 @@ for page in data["new"].keys():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    form = forms.LoginForm()
+    form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
@@ -71,6 +71,20 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('wtform'))
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        user = User(username=form.username.data, email=form.email.data)
+        user.set_password(form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        # flash('Account created')
+        return redirect(url_for('login'))
+    return render_template('register.html.j2', form=form)
+
 @app.route('/', methods=["GET", "POST"])
 @login_required
 def wtform():
@@ -78,7 +92,7 @@ def wtform():
     # filepathWTF = "static/burnie6.json"
     # fileWTF = open(filepathWTF)
     # dataWTF = json.load(fileWTF)
-    formWTF = forms.BigForm(data=data)
+    formWTF = BigForm(data=data)
     if formWTF.validate_on_submit():
         # Add form data to database
         for field in formWTF.index:

@@ -1,6 +1,27 @@
 from flask_wtf import FlaskForm
 from wtforms import Form, StringField, SubmitField, FormField, FieldList, PasswordField, BooleanField
-from wtforms.validators import DataRequired, Length
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from models import User
+
+class RegistrationForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    password2 = PasswordField(
+        'Confirm Password', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Register')
+
+    # Checks if user is already in the users table
+    def validate_username(self, username):
+        user = User.query.filter_by(username=username.data).first()
+        if user is not None:
+            raise ValidationError('Please use a different username.')
+
+    # Checks if email is already in the users table
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user is not None:
+            raise ValidationError('Please use a different email address.')
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
@@ -20,7 +41,6 @@ class IndexForm(FlaskForm):
 class CardForm(Form):
     heading = StringField('Heading')
     text = StringField('Text')
-    
 
 class AboutForm(FlaskForm):
     head_blurb = StringField('Head Blurb')
