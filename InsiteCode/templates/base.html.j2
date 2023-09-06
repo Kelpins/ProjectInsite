@@ -12,7 +12,12 @@
             {# This naming convention doesn't work if form.html.j2 extends base.html.j2 #}
             <a href="{{pages[page]['Link']}}" class="{{navBtnClass}}">{{pages[page]['Name']}}</a>
             {% endfor %}
-            <a href="/" class="btn btn-danger">Back To Form</a>
+            <a href="{{ url_for('wtform') }}" class="btn btn-danger">Back To Form</a>
+            {% if current_user.is_anonymous %}
+            <a href="{{ url_for('login') }}" class="btn btn-danger">Login</a>
+            {% else %}
+            <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+            {% endif %}
         </div>
         {# so much more than a dude playing the cowbell #}
         <div id="flex">

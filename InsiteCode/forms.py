@@ -1,9 +1,15 @@
 from flask_wtf import FlaskForm
-from wtforms import Form, StringField, SubmitField, FormField, FieldList, validators
+from wtforms import Form, StringField, SubmitField, FormField, FieldList, PasswordField, BooleanField
+from wtforms.validators import DataRequired, Length
 
+class LoginForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    remember_me = BooleanField('Remember Me')
+    submit = SubmitField('Sign In')
 
 class IndexForm(FlaskForm):
-    site_name = StringField('Site Name', [validators.Length(max=40)])
+    site_name = StringField('Site Name', [Length(max=40)])
     instagram = StringField('Instagram Link')
     twitter = StringField('Twitter Link')
     email = StringField('Email')
