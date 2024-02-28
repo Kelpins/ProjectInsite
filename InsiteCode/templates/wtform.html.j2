@@ -9,11 +9,22 @@ form template those elements are used as baseVars['pages'] #}
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link href="static/style.css" rel="stylesheet">
     {% block title %}
-
     <title>Form</title>
-
     {% endblock title %}
 
+    <nav id="header-nav" class="flexSpread m-3">
+        <div id="links" class="flex">
+            {% if current_user.is_anonymous %}
+            <a href="{{ url_for('login') }}" class="btn btn-danger">Login</a>
+            {% else %}
+            <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+            {% endif %}
+        </div>
+        {# so much more than a dude playing the cowbell #}
+        <div id="flex">
+            <p id="cowbell" class="right"> {{navbar_right}} </p>
+        </div>
+    </nav>
 </head>
 
 <body class="m-0">
