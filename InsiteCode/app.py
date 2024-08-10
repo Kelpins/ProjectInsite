@@ -9,6 +9,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager, current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
+import logging
+from logging.handlers import RotatingFileHandler
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -45,8 +47,26 @@ data["index"].update(data["base"])
 data["about"].update(data["base"])
 data["privacy"].update(data["base"])
 data["empty"].update(data["base"])
+# may require updating when adding new pages
 for page in data["new"].keys():
     data["new"][page].update(data["base"])
+
+#Logging
+
+if not app.debug:
+    # ...
+
+    if not os.path.exists('logs'):
+        os.mkdir('logs')
+    file_handler = RotatingFileHandler('logs/Insite.log', maxBytes=10240,
+                                       backupCount=10)
+    file_handler.setFormatter(logging.Formatter(
+        '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
+    file_handler.setLevel(logging.INFO)
+    app.logger.addHandler(file_handler)
+
+    app.logger.setLevel(logging.INFO)
+    app.logger.info('Insite startup')
 
 #Routers
 
@@ -123,8 +143,6 @@ def addPage():
     # Keep a counter and generate page names as "page1", "page2", etc.
     newPageCount = len(data["new"].keys()) + 1
     data["base"]["pages"]["page"+str(newPageCount)] = {"Name" : "page"+str(newPageCount), "Link" : "page"+str(newPageCount)}
-    # The IDs in baseVars["pages"] and the keys of newVars should always match exactly (except for home/about)
-    # Each new page has the values from emptyVars as default
     data["new"]["page"+str(newPageCount)] = {k:v for k, v in data["empty"].items()}
     return redirect(url_for('wtform'))
     
@@ -141,18 +159,10 @@ def privacy():
 @login_required
 def router(route):
     pages = data["base"]["pages"].keys()
-    # routes is a list of all possible pages except privacy-policy, form, and login
     routes = {}
-    # newRoutes has new page links as keys and page IDs as values
-    # newRoutes = {}
-    # print("All new pages: " + str(newVars.keys()))
     for page in pages:
         link = data["base"]["pages"][page]["Link"]
         routes[link] = page
-        # Previously used page["Name"]
-        # if page in newVars.keys():
-        #     newRoutes[link] = page
-            # print("New routes found: " + str(newRoutes))
 
     if route in routes.keys():
         pageID = routes[route]
@@ -160,12 +170,17 @@ def router(route):
             return render_template('index.html.j2', **data["index"])
         elif pageID == "about":
             return render_template('about.html.j2', **data["about"])
-        # Pair a specific set of newVars with each page route
-        # elif route in newRoutes.keys():
         else:
             # print("New page: " + pageName)
             return render_template('emptyTextPage.html.j2', **data["new"][pageID])
-        # else:
-        #     return render_template('emptyTextPage.html.j2', **emptyVars)
     else:
-        return "ILLEGAL PAGE!!!"
+        return redirect(url_for(not_found_error))
+    
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template('404.html.j2'), 404
+
+@app.errorhandler(500)
+def internal_error(error):
+    db.session.rollback()
+    return render_template('500.html.j2'), 500
